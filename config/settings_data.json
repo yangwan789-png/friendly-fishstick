@@ -1,6 +1,13 @@
 {
   "current": {
-    "color_scheme_group": "dark",
+    "color_schemes": {
+      "background": "#0a0a0f",
+      "text": "#ffffff",
+      "button": "#ff2a6d",
+      "button_label": "#ffffff",
+      "secondary_button_label": "#05d9e8",
+      "shadow": "#000000"
+    },
     "type_header_font": "dm_sans_n5",
     "type_body_font": "jost_n4"
   },
@@ -9,18 +16,13 @@
       "name": "Light",
       "category": "Light",
       "settings": {
-        "color_scheme_group": {
-          "bg": "#ffffff",
-          "text": "#111111",
-          "accent_1": "#008060",
-          "accent_2": "#ffffff",
-          "accent_3": "#f3f3f4",
-          "accent_4": "#000000",
-          "bg_secondary": "#fbfbfb",
-          "text_subdued": "#4d4d4d",
-          "border": "#d1d1d1",
-          "gradient_left": "#008060",
-          "gradient_right": "#004c3f"
+        "color_schemes": {
+          "background": "#ffffff",
+          "text": "#121212",
+          "button": "#121212",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#121212",
+          "shadow": "#121212"
         },
         "type_header_font": "dm_sans_n5",
         "type_body_font": "jost_n4"
@@ -30,18 +32,13 @@
       "name": "Dark",
       "category": "Dark",
       "settings": {
-        "color_scheme_group": {
-          "bg": "#0a0a0f",
+        "color_schemes": {
+          "background": "#0a0a0f",
           "text": "#ffffff",
-          "accent_1": "#ff2a6d",
-          "accent_2": "#05d9e8",
-          "accent_3": "#16161d",
-          "accent_4": "#a855f7",
-          "bg_secondary": "#111118",
-          "text_subdued": "#888899",
-          "border": "#2a2a35",
-          "gradient_left": "#ff2a6d",
-          "gradient_right": "#a855f7"
+          "button": "#ff2a6d",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#05d9e8",
+          "shadow": "#000000"
         },
         "type_header_font": "dm_sans_n5",
         "type_body_font": "jost_n4"
