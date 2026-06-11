@@ -1,15 +1,56 @@
 {
+  "color_schemes": [
+    {
+      "name": "Default",
+      "palette": {
+        "bg": "#ffffff",
+        "text": "#111111",
+        "accent_1": "#008060",
+        "accent_2": "#ffffff",
+        "accent_3": "#f3f3f4",
+        "accent_4": "#000000",
+        "bg_secondary": "#fbfbfb",
+        "text_subdued": "#4d4d4d",
+        "border": "#d1d1d1",
+        "gradient_left": "#008060",
+        "gradient_right": "#004c3f"
+      }
+    },
+    {
+      "name": "Dark",
+      "palette": {
+        "bg": "#0a0a0f",
+        "text": "#ffffff",
+        "accent_1": "#ff2a6d",
+        "accent_2": "#05d9e8",
+        "accent_3": "#16161d",
+        "accent_4": "#a855f7",
+        "bg_secondary": "#111118",
+        "text_subdued": "#888899",
+        "border": "#2a2a35",
+        "gradient_left": "#ff2a6d",
+        "gradient_right": "#a855f7"
+      }
+    }
+  ],
   "current": {
-    "color_scheme": "Dark",
+    "global_color_scheme": "Dark",
     "type_header_font": "dm_sans_n5",
     "type_body_font": "jost_n4"
   },
   "presets": [
     {
+      "name": "Default",
+      "category": "Light",
+      "settings": {
+        "global_color_scheme": "Default"
+      }
+    },
+    {
       "name": "Dark",
       "category": "Dark",
       "settings": {
-        "color_scheme": "Dark"
+        "global_color_scheme": "Dark"
       }
     }
   ]

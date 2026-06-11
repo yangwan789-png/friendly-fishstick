@@ -18,9 +18,9 @@
   "settings": [
     {
       "type": "color_scheme",
-      "id": "color_scheme",
+      "id": "global_color_scheme",
       "label": "Color scheme",
-      "default": "Dark"
+      "default": "Default"
     },
     {
       "type": "font_picker",
