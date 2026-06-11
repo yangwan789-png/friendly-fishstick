@@ -1,5 +1,3 @@
-{% render 'series-data' %}
-
 <section class="series-section">
   <div class="container">
     <div class="section-header">
@@ -8,9 +6,9 @@
       <p class="section-header__description">Browse our collection by your favorite anime series</p>
     </div>
     
-    <div class="series-grid">
+    <div class="series-grid" id="seriesGrid">
       <!-- Naruto -->
-      <a href="/collections/naruto" class="series-card">
+      <button class="series-card" data-series="naruto">
         <div class="series-card__image-wrapper">
           <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=naruto%20anime%20poster%20dark%20dramatic%20lighting%20orange%20blue&image_size=portrait_4_3" alt="Naruto" class="series-card__image">
           <div class="series-card__gradient"></div>
@@ -22,10 +20,10 @@
           </div>
           <div class="series-card__arrow">→</div>
         </div>
-      </a>
+      </button>
 
       <!-- One Piece -->
-      <a href="/collections/one-piece" class="series-card">
+      <button class="series-card" data-series="one-piece">
         <div class="series-card__image-wrapper">
           <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=one%20piece%20anime%20poster%20ocean%20adventure%20straw%20hat%20pirates&image_size=portrait_4_3" alt="One Piece" class="series-card__image">
           <div class="series-card__gradient"></div>
@@ -37,10 +35,10 @@
           </div>
           <div class="series-card__arrow">→</div>
         </div>
-      </a>
+      </button>
 
       <!-- Dragon Ball -->
-      <a href="/collections/dragon-ball" class="series-card">
+      <button class="series-card" data-series="dragon-ball">
         <div class="series-card__image-wrapper">
           <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dragon%20ball%20anime%20poster%20energy%20aura%20super%20saiyan&image_size=portrait_4_3" alt="Dragon Ball" class="series-card__image">
           <div class="series-card__gradient"></div>
@@ -52,10 +50,10 @@
           </div>
           <div class="series-card__arrow">→</div>
         </div>
-      </a>
+      </button>
 
       <!-- Marvel -->
-      <a href="/collections/marvel" class="series-card">
+      <button class="series-card" data-series="marvel">
         <div class="series-card__image-wrapper">
           <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=marvel%20superheroes%20poster%20comic%20style%20avengers&image_size=portrait_4_3" alt="Marvel" class="series-card__image">
           <div class="series-card__gradient"></div>
@@ -67,10 +65,144 @@
           </div>
           <div class="series-card__arrow">→</div>
         </div>
-      </a>
+      </button>
     </div>
   </div>
 </section>
+
+<div id="seriesDetail" class="series-detail" style="display: none;">
+  <div class="series-detail__header">
+    <div class="container">
+      <button id="backButton" class="series-detail__back">← Back to Series</button>
+      <h2 id="seriesTitle" class="series-detail__title"></h2>
+      <p id="seriesDescription" class="series-detail__description"></p>
+    </div>
+  </div>
+  
+  <div class="character-filters">
+    <div class="container">
+      <h3 class="character-filters__title">Characters</h3>
+      <div class="character-filters__list" id="characterFilters">
+      </div>
+    </div>
+  </div>
+  
+  <section class="style-tabs">
+    <div class="container">
+      <h3 class="style-tabs__title">Art Styles</h3>
+      <div class="style-tabs__list">
+        <button class="style-tab__item active" data-style="">All Styles</button>
+        <button class="style-tab__item" data-style="realistic">Realistic</button>
+        <button class="style-tab__item" data-style="anime">Anime</button>
+        <button class="style-tab__item" data-style="chibi">Chibi</button>
+        <button class="style-tab__item" data-style="cyberpunk">Cyberpunk</button>
+        <button class="style-tab__item" data-style="watercolor">Watercolor</button>
+      </div>
+    </div>
+  </section>
+  
+  <section class="collection-products">
+    <div class="product-grid" id="productGrid">
+    </div>
+  </section>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const seriesCards = document.querySelectorAll('.series-card');
+    const seriesDetail = document.getElementById('seriesDetail');
+    const seriesGrid = document.getElementById('seriesGrid');
+    const backButton = document.getElementById('backButton');
+    const seriesTitle = document.getElementById('seriesTitle');
+    const seriesDescription = document.getElementById('seriesDescription');
+    const characterFilters = document.getElementById('characterFilters');
+    const productGrid = document.getElementById('productGrid');
+
+    const seriesData = {
+      'naruto': {
+        title: 'Naruto',
+        description: 'Discover stunning art prints featuring your favorite Naruto characters. From the Hidden Leaf Village to epic battles, find the perfect piece for your collection.',
+        characters: ['Naruto Uzumaki', 'Sasuke Uchiha', 'Sakura Haruno', 'Kakashi Hatake', 'Itachi Uchiha']
+      },
+      'one-piece': {
+        title: 'One Piece',
+        description: 'Set sail with the Straw Hat Pirates! Explore our One Piece art print collection featuring Luffy and his crew on their adventure.',
+        characters: ['Monkey D. Luffy', 'Roronoa Zoro', 'Nami', 'Sanji', 'Tony Tony Chopper']
+      },
+      'dragon-ball': {
+        title: 'Dragon Ball',
+        description: 'Power up your space with Dragon Ball art prints! From Goku\'s epic transformations to legendary battles.',
+        characters: ['Goku', 'Vegeta', 'Piccolo', 'Gohan', 'Frieza']
+      },
+      'marvel': {
+        title: 'Marvel',
+        description: 'Assemble your dream collection with Marvel art prints! Featuring iconic superheroes from the Avengers.',
+        characters: ['Spider-Man', 'Iron Man', 'Captain America', 'Thor', 'Black Widow']
+      }
+    };
+
+    seriesCards.forEach(card => {
+      card.addEventListener('click', function() {
+        const series = this.dataset.series;
+        const data = seriesData[series];
+        
+        seriesTitle.textContent = data.title;
+        seriesDescription.textContent = data.description;
+        
+        characterFilters.innerHTML = '';
+        const allBtn = document.createElement('button');
+        allBtn.className = 'character-filter__item active';
+        allBtn.textContent = 'All Characters';
+        characterFilters.appendChild(allBtn);
+        
+        data.characters.forEach(char => {
+          const btn = document.createElement('button');
+          btn.className = 'character-filter__item';
+          btn.textContent = char;
+          characterFilters.appendChild(btn);
+        });
+        
+        productGrid.innerHTML = '';
+        for (let i = 1; i <= 6; i++) {
+          const productCard = document.createElement('div');
+          productCard.className = 'product-card';
+          productCard.innerHTML = `
+            <div class="product-card__image-wrapper">
+              <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(data.title + ' anime character art print poster high quality')}&image_size=portrait_4_3" alt="${data.title} product ${i}" class="product-card__image">
+              <span class="product-card__badge new">New</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">${data.title}</span>
+              <h3 class="product-card__title">${data.title} Character Art #${i}</h3>
+              <div class="product-card__price">$29.99</div>
+            </div>
+          `;
+          productGrid.appendChild(productCard);
+        }
+        
+        seriesGrid.style.display = 'none';
+        seriesDetail.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    backButton.addEventListener('click', function() {
+      seriesDetail.style.display = 'none';
+      seriesGrid.style.display = 'grid';
+    });
+
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('character-filter__item')) {
+        document.querySelectorAll('.character-filter__item').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+      }
+      if (e.target.classList.contains('style-tab__item')) {
+        document.querySelectorAll('.style-tab__item').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+      }
+    });
+  });
+</script>
 {% schema %}
 {
   "name": "Series Grid",

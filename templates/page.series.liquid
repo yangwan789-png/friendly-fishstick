@@ -1,0 +1,398 @@
+<!doctype html>
+<html class="js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ page.title }} - MangaKing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      :root {
+        --color-background: #0a0a0f;
+        --color-background-secondary: #111118;
+        --color-background-card: #16161d;
+        --color-text: #ffffff;
+        --color-text-muted: #888899;
+        --color-accent-pink: #ff2a6d;
+        --color-accent-cyan: #05d9e8;
+        --color-border: #2a2a35;
+      }
+      body {
+        font-family: 'Jost', sans-serif;
+        background-color: var(--color-background);
+        color: var(--color-text);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      .container { max-width: 1400px; margin: 0 auto; padding: 0 1rem; }
+      @media (min-width: 768px) { .container { padding: 0 2rem; } }
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(10, 10, 15, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--color-border);
+      }
+      .header__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1rem;
+      }
+      .header__logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        color: var(--color-text);
+      }
+      .header__logo-icon {
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, var(--color-accent-pink), var(--color-accent-cyan));
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      .header__logo-text {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--color-accent-pink), var(--color-accent-cyan));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .collection-banner {
+        padding: 3rem 1rem;
+        padding-top: calc(3rem + 60px);
+        text-align: center;
+        background: var(--color-background-secondary);
+      }
+      .collection-banner h1 {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+      }
+      @media (min-width: 768px) { .collection-banner h1 { font-size: 2.5rem; } }
+      .collection-banner p {
+        color: var(--color-text-muted);
+        font-size: 1rem;
+      }
+      .collection-banner__count {
+        color: var(--color-accent-cyan);
+        font-weight: 600;
+        margin-top: 0.5rem;
+      }
+      .character-filters {
+        padding: 2rem 1rem;
+        background: var(--color-background-secondary);
+        border-bottom: 1px solid var(--color-border);
+      }
+      .character-filters__title {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--color-text-muted);
+      }
+      .character-filters__list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .character-filter__item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1rem;
+        background: var(--color-background-card);
+        border: 1px solid var(--color-border);
+        border-radius: 50px;
+        color: var(--color-text);
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .character-filter__item:hover { border-color: var(--color-accent-pink); }
+      .character-filter__item.active {
+        background: var(--color-accent-pink);
+        border-color: var(--color-accent-pink);
+        color: white;
+      }
+      .style-tabs {
+        padding: 1.5rem 1rem;
+        border-bottom: 1px solid var(--color-border);
+      }
+      .style-tabs__title {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--color-text-muted);
+      }
+      .style-tabs__list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .style-tab__item {
+        padding: 0.5rem 1rem;
+        background: transparent;
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        color: var(--color-text-muted);
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .style-tab__item:hover {
+        border-color: var(--color-accent-cyan);
+        color: var(--color-accent-cyan);
+      }
+      .style-tab__item.active {
+        background: var(--color-accent-cyan);
+        border-color: var(--color-accent-cyan);
+        color: #000;
+      }
+      .collection-products {
+        padding: 2rem 1rem;
+      }
+      @media (min-width: 768px) { .collection-products { padding: 3rem 2rem; } }
+      .product-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      @media (min-width: 568px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (min-width: 768px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
+      @media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(4, 1fr); } }
+      .product-card {
+        background: var(--color-background-card);
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid var(--color-border);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: var(--color-text);
+      }
+      .product-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--color-accent-cyan);
+      }
+      .product-card__image-wrapper {
+        position: relative;
+        width: 100%;
+        padding-bottom: 120%;
+        overflow: hidden;
+      }
+      .product-card__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .product-card__badge {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        background: var(--color-accent-pink);
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 0.25rem 0.5rem;
+        border-radius: 12px;
+      }
+      .product-card__badge.new {
+        background: var(--color-accent-cyan);
+        color: #000;
+      }
+      .product-card__content {
+        padding: 1rem;
+      }
+      .product-card__category {
+        font-size: 0.75rem;
+        color: var(--color-accent-pink);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.5rem;
+      }
+      .product-card__title {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .product-card__price {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--color-accent-cyan);
+      }
+      .footer {
+        background: var(--color-background-secondary);
+        border-top: 1px solid var(--color-border);
+        padding: 3rem 1rem;
+        text-align: center;
+      }
+    </style>
+    {{ content_for_header }}
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__content">
+        <a href="{{ routes.root_url }}" class="header__logo">
+          <div class="header__logo-icon">MK</div>
+          <span class="header__logo-text">MangaKing</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="collection-banner">
+      <div class="container">
+        {% if page.title == 'Naruto' %}
+          <h1>Naruto</h1>
+          <p>Discover stunning art prints featuring your favorite Naruto characters. From the Hidden Leaf Village to epic battles, find the perfect piece for your collection.</p>
+          <p class="collection-banner__count">5 Characters Available</p>
+        {% elsif page.title == 'One Piece' %}
+          <h1>One Piece</h1>
+          <p>Set sail with the Straw Hat Pirates! Explore our One Piece art print collection featuring Luffy and his crew on their adventure.</p>
+          <p class="collection-banner__count">5 Characters Available</p>
+        {% elsif page.title == 'Dragon Ball' %}
+          <h1>Dragon Ball</h1>
+          <p>Power up your space with Dragon Ball art prints! From Goku's epic transformations to legendary battles.</p>
+          <p class="collection-banner__count">5 Characters Available</p>
+        {% elsif page.title == 'Marvel' %}
+          <h1>Marvel</h1>
+          <p>Assemble your dream collection with Marvel art prints! Featuring iconic superheroes from the Avengers.</p>
+          <p class="collection-banner__count">5 Characters Available</p>
+        {% else %}
+          <h1>{{ page.title }}</h1>
+          <p>{{ page.content }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <section class="character-filters">
+      <div class="container">
+        <h3 class="character-filters__title">Characters</h3>
+        <div class="character-filters__list">
+          {% if page.title == 'Naruto' %}
+            <button class="character-filter__item active" data-character="">All Characters</button>
+            <button class="character-filter__item" data-character="naruto-uzumaki">Naruto Uzumaki</button>
+            <button class="character-filter__item" data-character="sasuke-uchiha">Sasuke Uchiha</button>
+            <button class="character-filter__item" data-character="sakura-haruno">Sakura Haruno</button>
+            <button class="character-filter__item" data-character="kakashi-hatake">Kakashi Hatake</button>
+            <button class="character-filter__item" data-character="itachi-uchiha">Itachi Uchiha</button>
+          {% elsif page.title == 'One Piece' %}
+            <button class="character-filter__item active" data-character="">All Characters</button>
+            <button class="character-filter__item" data-character="luffy">Monkey D. Luffy</button>
+            <button class="character-filter__item" data-character="zoro">Roronoa Zoro</button>
+            <button class="character-filter__item" data-character="nami">Nami</button>
+            <button class="character-filter__item" data-character="sanji">Sanji</button>
+            <button class="character-filter__item" data-character="chopper">Tony Tony Chopper</button>
+          {% elsif page.title == 'Dragon Ball' %}
+            <button class="character-filter__item active" data-character="">All Characters</button>
+            <button class="character-filter__item" data-character="goku">Goku</button>
+            <button class="character-filter__item" data-character="vegeta">Vegeta</button>
+            <button class="character-filter__item" data-character="piccolo">Piccolo</button>
+            <button class="character-filter__item" data-character="gohan">Gohan</button>
+            <button class="character-filter__item" data-character="frieza">Frieza</button>
+          {% elsif page.title == 'Marvel' %}
+            <button class="character-filter__item active" data-character="">All Characters</button>
+            <button class="character-filter__item" data-character="spider-man">Spider-Man</button>
+            <button class="character-filter__item" data-character="iron-man">Iron Man</button>
+            <button class="character-filter__item" data-character="captain-america">Captain America</button>
+            <button class="character-filter__item" data-character="thor">Thor</button>
+            <button class="character-filter__item" data-character="black-widow">Black Widow</button>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+
+    <section class="style-tabs">
+      <div class="container">
+        <h3 class="style-tabs__title">Art Styles</h3>
+        <div class="style-tabs__list">
+          <button class="style-tab__item active" data-style="">All Styles</button>
+          <button class="style-tab__item" data-style="realistic">Realistic</button>
+          <button class="style-tab__item" data-style="anime">Anime</button>
+          <button class="style-tab__item" data-style="chibi">Chibi</button>
+          <button class="style-tab__item" data-style="cyberpunk">Cyberpunk</button>
+          <button class="style-tab__item" data-style="watercolor">Watercolor</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="collection-products">
+      <div class="product-grid">
+        {% assign product_count = 6 %}
+        {% for i in (1..product_count) %}
+          <a href="/products/{{ page.handle }}-product-{{ i }}" class="product-card" data-character="" data-style="anime">
+            <div class="product-card__image-wrapper">
+              <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt={{ page.title | url_encode }}%20anime%20character%20art%20print%20poster%20high%20quality&image_size=portrait_4_3" alt="{{ page.title }} product {{ i }}" class="product-card__image">
+              <span class="product-card__badge new">New</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">{{ page.title }}</span>
+              <h3 class="product-card__title">{{ page.title }} Character Art #{{ i }}</h3>
+              <div class="product-card__price">$29.99</div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="header__logo">
+          <div class="header__logo-icon">MK</div>
+          <span class="header__logo-text">MangaKing</span>
+        </div>
+        <p style="color: var(--color-text-muted); margin-top: 1rem; font-size: 0.9rem;">
+          Premium anime art prints featuring your favorite characters
+        </p>
+        <p style="color: var(--color-text-muted); font-size: 0.8rem; margin-top: 1rem;">
+          © 2026 MangaKing. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.character-filter__item');
+        filterButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+          });
+        });
+        const styleButtons = document.querySelectorAll('.style-tab__item');
+        styleButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            styleButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
