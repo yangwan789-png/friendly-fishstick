@@ -1,3 +1,5 @@
+{% render 'series-data' %}
+
 <section class="series-section">
   <div class="container">
     <div class="section-header">
@@ -7,29 +9,65 @@
     </div>
     
     <div class="series-grid">
-      {% for collection in collections.all %}
-        {% if collection.handle != 'all' %}
-          <a href="/collections/{{ collection.handle }}" class="series-card">
-            <div class="series-card__image-wrapper">
-              {% if collection.image %}
-                <img src="{{ collection.image.src | img_url: 'large' }}" alt="{{ collection.title }}" class="series-card__image">
-              {% else %}
-                <div class="series-card__placeholder">
-                  <span>{{ collection.title | slice: 0, 2 }}</span>
-                </div>
-              {% endif %}
-              <div class="series-card__gradient"></div>
-            </div>
-            <div class="series-card__content">
-              <h3 class="series-card__title">{{ collection.title }}</h3>
-              <div class="series-card__info">
-                <span class="series-card__count">{{ collection.products_count }} art prints</span>
-              </div>
-              <div class="series-card__arrow">→</div>
-            </div>
-          </a>
-        {% endif %}
-      {% endfor %}
+      <!-- Naruto -->
+      <a href="/collections/naruto" class="series-card">
+        <div class="series-card__image-wrapper">
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=naruto%20anime%20poster%20dark%20dramatic%20lighting%20orange%20blue&image_size=portrait_4_3" alt="Naruto" class="series-card__image">
+          <div class="series-card__gradient"></div>
+        </div>
+        <div class="series-card__content">
+          <h3 class="series-card__title">Naruto</h3>
+          <div class="series-card__info">
+            <span class="series-card__count">5 Characters</span>
+          </div>
+          <div class="series-card__arrow">→</div>
+        </div>
+      </a>
+
+      <!-- One Piece -->
+      <a href="/collections/one-piece" class="series-card">
+        <div class="series-card__image-wrapper">
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=one%20piece%20anime%20poster%20ocean%20adventure%20straw%20hat%20pirates&image_size=portrait_4_3" alt="One Piece" class="series-card__image">
+          <div class="series-card__gradient"></div>
+        </div>
+        <div class="series-card__content">
+          <h3 class="series-card__title">One Piece</h3>
+          <div class="series-card__info">
+            <span class="series-card__count">5 Characters</span>
+          </div>
+          <div class="series-card__arrow">→</div>
+        </div>
+      </a>
+
+      <!-- Dragon Ball -->
+      <a href="/collections/dragon-ball" class="series-card">
+        <div class="series-card__image-wrapper">
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dragon%20ball%20anime%20poster%20energy%20aura%20super%20saiyan&image_size=portrait_4_3" alt="Dragon Ball" class="series-card__image">
+          <div class="series-card__gradient"></div>
+        </div>
+        <div class="series-card__content">
+          <h3 class="series-card__title">Dragon Ball</h3>
+          <div class="series-card__info">
+            <span class="series-card__count">5 Characters</span>
+          </div>
+          <div class="series-card__arrow">→</div>
+        </div>
+      </a>
+
+      <!-- Marvel -->
+      <a href="/collections/marvel" class="series-card">
+        <div class="series-card__image-wrapper">
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=marvel%20superheroes%20poster%20comic%20style%20avengers&image_size=portrait_4_3" alt="Marvel" class="series-card__image">
+          <div class="series-card__gradient"></div>
+        </div>
+        <div class="series-card__content">
+          <h3 class="series-card__title">Marvel</h3>
+          <div class="series-card__info">
+            <span class="series-card__count">5 Characters</span>
+          </div>
+          <div class="series-card__arrow">→</div>
+        </div>
+      </a>
     </div>
   </div>
 </section>

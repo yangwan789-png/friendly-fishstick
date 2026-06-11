@@ -2,35 +2,107 @@
   <div class="container">
     <h3 class="character-filters__title">Characters</h3>
     <div class="character-filters__list">
-      <button class="character-filter__item {% unless current_tags %}active{% endunless %}" data-tag="">
+      <button class="character-filter__item active" data-character="">
         <span class="character-filter__name">All Characters</span>
-        <span class="character-filter__count">{{ collection.products_count }}</span>
       </button>
-      {% assign character_tags = collection.all_tags | where_exp: 'tag', 'tag contains 'Character'' %}
-      {% for tag in character_tags %}
-        {% assign tag_name = tag | replace: 'Character_', '' %}
-        {% assign tag_count = collection.products | where: 'tags', tag | size %}
-        <button class="character-filter__item {% if current_tags contains tag %}active{% endif %}" data-tag="{{ tag }}">
-          <span class="character-filter__name">{{ tag_name }}</span>
-          <span class="character-filter__count">{{ tag_count }}</span>
+      
+      <!-- Naruto Characters -->
+      {% if collection.handle == 'naruto' %}
+        <button class="character-filter__item" data-character="naruto-uzumaki">
+          <span class="character-filter__name">Naruto Uzumaki</span>
         </button>
-      {% endfor %}
+        <button class="character-filter__item" data-character="sasuke-uchiha">
+          <span class="character-filter__name">Sasuke Uchiha</span>
+        </button>
+        <button class="character-filter__item" data-character="sakura-haruno">
+          <span class="character-filter__name">Sakura Haruno</span>
+        </button>
+        <button class="character-filter__item" data-character="kakashi-hatake">
+          <span class="character-filter__name">Kakashi Hatake</span>
+        </button>
+        <button class="character-filter__item" data-character="itachi-uchiha">
+          <span class="character-filter__name">Itachi Uchiha</span>
+        </button>
+      {% endif %}
+      
+      <!-- One Piece Characters -->
+      {% if collection.handle == 'one-piece' %}
+        <button class="character-filter__item" data-character="monkey-d-luffy">
+          <span class="character-filter__name">Monkey D. Luffy</span>
+        </button>
+        <button class="character-filter__item" data-character="roronoa-zoro">
+          <span class="character-filter__name">Roronoa Zoro</span>
+        </button>
+        <button class="character-filter__item" data-character="nami">
+          <span class="character-filter__name">Nami</span>
+        </button>
+        <button class="character-filter__item" data-character="sanji">
+          <span class="character-filter__name">Sanji</span>
+        </button>
+        <button class="character-filter__item" data-character="tony-tony-chopper">
+          <span class="character-filter__name">Tony Tony Chopper</span>
+        </button>
+      {% endif %}
+      
+      <!-- Dragon Ball Characters -->
+      {% if collection.handle == 'dragon-ball' %}
+        <button class="character-filter__item" data-character="goku">
+          <span class="character-filter__name">Goku</span>
+        </button>
+        <button class="character-filter__item" data-character="vegeta">
+          <span class="character-filter__name">Vegeta</span>
+        </button>
+        <button class="character-filter__item" data-character="piccolo">
+          <span class="character-filter__name">Piccolo</span>
+        </button>
+        <button class="character-filter__item" data-character="gohan">
+          <span class="character-filter__name">Gohan</span>
+        </button>
+        <button class="character-filter__item" data-character="frieza">
+          <span class="character-filter__name">Frieza</span>
+        </button>
+      {% endif %}
+      
+      <!-- Marvel Characters -->
+      {% if collection.handle == 'marvel' %}
+        <button class="character-filter__item" data-character="spider-man">
+          <span class="character-filter__name">Spider-Man</span>
+        </button>
+        <button class="character-filter__item" data-character="iron-man">
+          <span class="character-filter__name">Iron Man</span>
+        </button>
+        <button class="character-filter__item" data-character="captain-america">
+          <span class="character-filter__name">Captain America</span>
+        </button>
+        <button class="character-filter__item" data-character="thor">
+          <span class="character-filter__name">Thor</span>
+        </button>
+        <button class="character-filter__item" data-character="black-widow">
+          <span class="character-filter__name">Black Widow</span>
+        </button>
+      {% endif %}
     </div>
   </div>
 </section>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const filterButtons = document.querySelectorAll('.character-filter__item');
-    const collectionUrl = '{{ collection.url }}';
     
     filterButtons.forEach(button => {
       button.addEventListener('click', function() {
-        const tag = this.dataset.tag;
-        let url = collectionUrl;
-        if (tag) {
-          url = `${collectionUrl}/${tag}`;
-        }
-        window.location.href = url;
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        const character = this.dataset.character;
+        const products = document.querySelectorAll('.product-card');
+        
+        products.forEach(product => {
+          if (!character || product.dataset.character === character) {
+            product.style.display = '';
+          } else {
+            product.style.display = 'none';
+          }
+        });
       });
     });
   });

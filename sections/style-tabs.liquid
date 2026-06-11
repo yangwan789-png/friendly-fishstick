@@ -2,32 +2,49 @@
   <div class="container">
     <h3 class="style-tabs__title">Art Styles</h3>
     <div class="style-tabs__list">
-      <button class="style-tab__item {% unless current_tags contains 'Style_' %}active{% endunless %}" data-style="">
+      <button class="style-tab__item active" data-style="">
         All Styles
       </button>
-      {% assign style_tags = collection.all_tags | where_exp: 'tag', 'tag contains 'Style'' %}
-      {% for tag in style_tags %}
-        {% assign style_name = tag | replace: 'Style_', '' %}
-        <button class="style-tab__item {% if current_tags contains tag %}active{% endif %}" data-style="{{ tag }}">
-          {{ style_name }}
-        </button>
-      {% endfor %}
+      <button class="style-tab__item" data-style="realistic">
+        Realistic
+      </button>
+      <button class="style-tab__item" data-style="anime">
+        Anime
+      </button>
+      <button class="style-tab__item" data-style="chibi">
+        Chibi
+      </button>
+      <button class="style-tab__item" data-style="cyberpunk">
+        Cyberpunk
+      </button>
+      <button class="style-tab__item" data-style="watercolor">
+        Watercolor
+      </button>
+      <button class="style-tab__item" data-style="minimalist">
+        Minimalist
+      </button>
     </div>
   </div>
 </section>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const styleButtons = document.querySelectorAll('.style-tab__item');
-    const collectionUrl = '{{ collection.url }}';
     
     styleButtons.forEach(button => {
       button.addEventListener('click', function() {
+        styleButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
         const style = this.dataset.style;
-        let url = collectionUrl;
-        if (style) {
-          url = `${collectionUrl}/${style}`;
-        }
-        window.location.href = url;
+        const products = document.querySelectorAll('.product-card');
+        
+        products.forEach(product => {
+          if (!style || product.dataset.style === style) {
+            product.style.display = '';
+          } else {
+            product.style.display = 'none';
+          }
+        });
       });
     });
   });

@@ -1,14 +1,35 @@
 <section class="collection-banner">
   <div class="container">
-    {% if collection.title %}
-      <h1>{{ collection.title }}</h1>
-    {% endif %}
-    {% if collection.description %}
-      <p>{{ collection.description }}</p>
-    {% endif %}
-    {% if collection.products_count > 0 %}
-      <p class="collection-banner__count">{{ collection.products_count }} art prints available</p>
-    {% endif %}
+    {% case collection.handle %}
+      {% when 'naruto' %}
+        <h1>Naruto</h1>
+        <p>Discover stunning art prints featuring your favorite Naruto characters. From the Hidden Leaf Village to epic battles, find the perfect piece for your collection.</p>
+        <p class="collection-banner__count">5 Characters Available</p>
+      
+      {% when 'one-piece' %}
+        <h1>One Piece</h1>
+        <p>Set sail with the Straw Hat Pirates! Explore our One Piece art print collection featuring Luffy and his crew on their adventure to find the legendary treasure.</p>
+        <p class="collection-banner__count">5 Characters Available</p>
+      
+      {% when 'dragon-ball' %}
+        <h1>Dragon Ball</h1>
+        <p>Power up your space with Dragon Ball art prints! From Goku's epic transformations to legendary battles, bring the action to your walls.</p>
+        <p class="collection-banner__count">5 Characters Available</p>
+      
+      {% when 'marvel' %}
+        <h1>Marvel</h1>
+        <p>Assemble your dream collection with Marvel art prints! Featuring iconic superheroes from the Avengers and beyond.</p>
+        <p class="collection-banner__count">5 Characters Available</p>
+      
+      {% else %}
+        <h1>{{ collection.title }}</h1>
+        {% if collection.description %}
+          <p>{{ collection.description }}</p>
+        {% endif %}
+        {% if collection.products_count > 0 %}
+          <p class="collection-banner__count">{{ collection.products_count }} art prints available</p>
+        {% endif %}
+    {% endcase %}
   </div>
 </section>
 {% schema %}

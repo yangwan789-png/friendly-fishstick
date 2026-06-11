@@ -1,0 +1,18 @@
+{% comment %}
+  Manga Series and Characters Configuration
+  Series: Naruto, One Piece, Dragon Ball, Marvel
+{% endcomment %}
+
+{% assign series_data = "Naruto,One Piece,Dragon Ball,Marvel" | split: "," %}
+
+{% assign naruto_characters = "Naruto Uzumaki,Sasuke Uchiha,Sakura Haruno,Kakashi Hatake,Itachi Uchiha" | split: "," %}
+{% assign onepiece_characters = "Monkey D. Luffy,Roronoa Zoro,Nami,Sanji,Tony Tony Chopper" | split: "," %}
+{% assign dragonball_characters = "Goku,Vegeta,Piccolo,Gohan,Frieza" | split: "," %}
+{% assign marvel_characters = "Spider-Man,Iron Man,Captain America,Thor,Black Widow" | split: "," %}
+
+{% assign series_images = "
+  Naruto:https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=naruto%20anime%20poster%20dark%20dramatic%20lighting&image_size=portrait_4_3,
+  One Piece:https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=one%20piece%20anime%20poster%20ocean%20adventure&image_size=portrait_4_3,
+  Dragon Ball:https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dragon%20ball%20anime%20poster%20energy%20aura&image_size=portrait_4_3,
+  Marvel:https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=marvel%20superheroes%20poster%20comic%20style&image_size=portrait_4_3
+" %}
