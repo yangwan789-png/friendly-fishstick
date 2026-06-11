@@ -1,10 +1,4 @@
 {
-  "name": "theme_info",
-  "theme_name": "MangaKing",
-  "theme_version": "1.0.0",
-  "theme_author": "MangaKing",
-  "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-  "theme_support_url": "https://support.shopify.com/",
   "sections": {
     "header": {
       "type": "header",
@@ -18,7 +12,7 @@
   "settings": [
     {
       "type": "color_scheme",
-      "id": "global_color_scheme",
+      "id": "color_scheme",
       "label": "Color scheme",
       "default": "Default"
     },

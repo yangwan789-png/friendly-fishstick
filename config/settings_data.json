@@ -34,7 +34,7 @@
     }
   ],
   "current": {
-    "global_color_scheme": "Dark",
+    "color_scheme": "Dark",
     "type_header_font": "dm_sans_n5",
     "type_body_font": "jost_n4"
   },
@@ -43,14 +43,14 @@
       "name": "Default",
       "category": "Light",
       "settings": {
-        "global_color_scheme": "Default"
+        "color_scheme": "Default"
       }
     },
     {
       "name": "Dark",
       "category": "Dark",
       "settings": {
-        "global_color_scheme": "Dark"
+        "color_scheme": "Dark"
       }
     }
   ]
