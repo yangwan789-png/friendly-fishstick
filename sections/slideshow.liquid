@@ -1,0 +1,75 @@
+<section class="slideshow">
+  {% for block in section.blocks %}
+    <div class="slideshow__slide">
+      {% if block.settings.headline != blank %}
+        <h2>{{ block.settings.headline }}</h2>
+      {% endif %}
+      {% if block.settings.subheading != blank %}
+        <p>{{ block.settings.subheading }}</p>
+      {% endif %}
+      {% if block.settings.button_label != blank %}
+        <a href="{{ block.settings.button_link }}" class="button">{{ block.settings.button_label }}</a>
+      {% endif %}
+    </div>
+  {% endfor %}
+</section>
+{% schema %}
+{
+  "name": "Slideshow",
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Headline"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "default": "large",
+      "options": [
+        {"value": "small", "label": "Small"},
+        {"value": "medium", "label": "Medium"},
+        {"value": "large", "label": "Large"}
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "Dark"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slideshow",
+      "blocks": [
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}

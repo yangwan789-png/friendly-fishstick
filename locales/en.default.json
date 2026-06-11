@@ -1,0 +1,31 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_text": "Skip to content"
+    },
+    "404": {
+      "title": "Page not found",
+      "subtext_html": "The page you requested doesn't exist. Click <a href=\"/collections/all\">here</a> to continue shopping."
+    }
+  },
+  "sections": {
+    "header": {
+      "name": "Header"
+    },
+    "footer": {
+      "name": "Footer"
+    },
+    "slideshow": {
+      "name": "Slideshow"
+    },
+    "featured-collection": {
+      "name": "Featured collection"
+    },
+    "collection-list": {
+      "name": "Collection list"
+    },
+    "rich-text": {
+      "name": "Rich text"
+    }
+  }
+}

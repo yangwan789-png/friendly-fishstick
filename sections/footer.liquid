@@ -1,0 +1,20 @@
+<footer class="footer">
+  <div class="footer__content">
+    <div class="footer__copyright">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All anime IP rights belong to their original owners.</p>
+    </div>
+  </div>
+</footer>
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "Dark"
+    }
+  ]
+}
+{% endschema %}

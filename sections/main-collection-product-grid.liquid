@@ -1,0 +1,32 @@
+<section class="collection-product-grid">
+  <div class="product-grid">
+    {% for product in collection.products %}
+      <a href="{{ product.url }}" class="product-card">
+        {% if product.featured_image %}
+          {{ product.featured_image | image_url: width: 400 | image_tag: alt: product.title }}
+        {% endif %}
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.price | money }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Main collection product grid",
+  "settings": [
+    {
+      "type": "number",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "default": 12
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "Dark"
+    }
+  ]
+}
+{% endschema %}

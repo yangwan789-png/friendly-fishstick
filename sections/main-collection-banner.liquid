@@ -1,0 +1,27 @@
+<section class="collection-banner">
+  {% if collection.title %}
+    <h1>{{ collection.title }}</h1>
+  {% endif %}
+  {% if collection.description %}
+    <p>{{ collection.description }}</p>
+  {% endif %}
+</section>
+{% schema %}
+{
+  "name": "Main collection banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "label": "Show collection image",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "Dark"
+    }
+  ]
+}
+{% endschema %}

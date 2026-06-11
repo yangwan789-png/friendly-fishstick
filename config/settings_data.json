@@ -1,0 +1,44 @@
+{
+  "current": {
+    "logo_width": 100,
+    "type_header_font": "dm_sans_n5",
+    "type_body_font": "jost_n4",
+    "color_schemes": {
+      "background": "#111111",
+      "text": "#FFFFFF",
+      "accent_1": "#ff2a6d",
+      "accent_2": "#05d9e8",
+      "button": "#ff2a6d",
+      "button_label": "#FFFFFF",
+      "border": "#333333",
+      "background_secondary": "#1a1a1a",
+      "text_subdued": "#888888",
+      "accent_1_background": "#ff2a6d",
+      "accent_1_text": "#FFFFFF",
+      "accent_2_background": "#05d9e8",
+      "accent_2_text": "#000000"
+    }
+  },
+  "presets": [
+    {
+      "name": "Dark",
+      "settings": {
+        "color_schemes": {
+          "background": "#111111",
+          "text": "#FFFFFF",
+          "accent_1": "#ff2a6d",
+          "accent_2": "#05d9e8",
+          "button": "#ff2a6d",
+          "button_label": "#FFFFFF",
+          "border": "#333333",
+          "background_secondary": "#1a1a1a",
+          "text_subdued": "#888888",
+          "accent_1_background": "#ff2a6d",
+          "accent_1_text": "#FFFFFF",
+          "accent_2_background": "#05d9e8",
+          "accent_2_text": "#000000"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+<!doctype html>
+<html class="js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+      {{ page_title }}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+    <style>
+      :root {
+        --color-background: {{ settings.color_schemes.background }};
+        --color-text: {{ settings.color_schemes.text }};
+        --color-accent-1: {{ settings.color_schemes.accent_1 }};
+        --color-accent-2: {{ settings.color_schemes.accent_2 }};
+        --color-button: {{ settings.color_schemes.button }};
+        --color-border: {{ settings.color_schemes.border }};
+      }
+      body {
+        margin: 0;
+        font-family: {{ settings.type_body_font.family }}, sans-serif;
+        background-color: var(--color-background);
+        color: var(--color-text);
+      }
+    </style>
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+  </head>
+  <body>
+    {% sections 'header-group' %}
+    <main id="MainContent" class="content-for-layout" role="main">
+      {{ content_for_layout }}
+    </main>
+    {% sections 'footer-group' %}
+  </body>
+</html>

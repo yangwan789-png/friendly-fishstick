@@ -1,0 +1,33 @@
+<section class="product">
+  {% if product.images.size > 0 %}
+    <div class="product__images">
+      {% for image in product.images %}
+        {{ image | image_url: width: 800 | image_tag: alt: product.title }}
+      {% endfor %}
+    </div>
+  {% endif %}
+  <div class="product__info">
+    <h1>{{ product.title }}</h1>
+    <p>{{ product.price | money }}</p>
+    {% if product.description %}
+      <div>{{ product.description }}</div>
+    {% endif %}
+    <form action="{{ routes.cart_add_url }}" method="post">
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+      <button type="submit">Add to cart</button>
+    </form>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Main product",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "Dark"
+    }
+  ]
+}
+{% endschema %}

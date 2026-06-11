@@ -1,0 +1,156 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "MangaKing",
+    "theme_version": "1.0.0",
+    "theme_author": "MangaKing",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 50,
+        "max": 300,
+        "step": 10,
+        "default": 100,
+        "unit": "px",
+        "label": "Logo width"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color_scheme_group",
+        "id": "color_schemes",
+        "definition": [
+          {
+            "type": "color",
+            "id": "background",
+            "label": "Background",
+            "default": "#111111"
+          },
+          {
+            "type": "color",
+            "id": "text",
+            "label": "Text",
+            "default": "#FFFFFF"
+          },
+          {
+            "type": "color",
+            "id": "accent_1",
+            "label": "Accent 1",
+            "default": "#ff2a6d"
+          },
+          {
+            "type": "color",
+            "id": "accent_2",
+            "label": "Accent 2",
+            "default": "#05d9e8"
+          },
+          {
+            "type": "color",
+            "id": "button",
+            "label": "Button",
+            "default": "#ff2a6d"
+          },
+          {
+            "type": "color",
+            "id": "button_label",
+            "label": "Button text",
+            "default": "#FFFFFF"
+          },
+          {
+            "type": "color",
+            "id": "border",
+            "label": "Border",
+            "default": "#333333"
+          },
+          {
+            "type": "color",
+            "id": "background_secondary",
+            "label": "Background secondary",
+            "default": "#1a1a1a"
+          },
+          {
+            "type": "color",
+            "id": "text_subdued",
+            "label": "Text subdued",
+            "default": "#888888"
+          },
+          {
+            "type": "color",
+            "id": "accent_1_background",
+            "label": "Accent 1 background",
+            "default": "#ff2a6d"
+          },
+          {
+            "type": "color",
+            "id": "accent_1_text",
+            "label": "Accent 1 text",
+            "default": "#FFFFFF"
+          },
+          {
+            "type": "color",
+            "id": "accent_2_background",
+            "label": "Accent 2 background",
+            "default": "#05d9e8"
+          },
+          {
+            "type": "color",
+            "id": "accent_2_text",
+            "label": "Accent 2 text",
+            "default": "#000000"
+          }
+        ],
+        "role": {
+          "text": "text",
+          "text_subdued": "text_subdued",
+          "background": {
+            "solid": "background"
+          },
+          "background_secondary": "background_secondary",
+          "accent_1": "accent_1",
+          "accent_1_background": "accent_1_background",
+          "accent_1_text": "accent_1_text",
+          "accent_2": "accent_2",
+          "accent_2_background": "accent_2_background",
+          "accent_2_text": "accent_2_text",
+          "borders": "border",
+          "links": "accent_2",
+          "icons": "text",
+          "primary_button": "button",
+          "on_primary_button": "button_label",
+          "primary_button_border": "button"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "default": "dm_sans_n5",
+        "label": "Heading font"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "default": "jost_n4",
+        "label": "Body font"
+      }
+    ]
+  }
+]

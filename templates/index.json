@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slide1": {
+          "type": "slide",
+          "settings": {
+            "headline": "Welcome to MangaKing",
+            "subheading": "Explore amazing anime art prints",
+            "button_label": "Shop Now",
+            "button_link": "/collections/all"
+          }
+        }
+      },
+      "block_order": ["slide1"],
+      "settings": {
+        "height": "large",
+        "color_scheme": "Dark"
+      }
+    },
+    "collection-list": {
+      "type": "collection-list",
+      "settings": {
+        "heading": "Popular Collections",
+        "collections_to_show": "all",
+        "color_scheme": "Dark"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "all",
+        "heading": "Featured Prints",
+        "color_scheme": "Dark"
+      }
+    }
+  },
+  "order": ["slideshow", "collection-list", "featured-collection"]
+}

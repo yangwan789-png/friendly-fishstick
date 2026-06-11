@@ -1,0 +1,48 @@
+<header class="header">
+  <div class="header__content">
+    <a href="{{ routes.root_url }}" class="header__logo">
+      {% if settings.logo != blank %}
+        {{ settings.logo | image_url: width: settings.logo_width | image_tag: alt: shop.name }}
+      {% else %}
+        <span>{{ shop.name }}</span>
+      {% endif %}
+    </a>
+    <nav class="header__navigation">
+      <a href="/collections/all">All Products</a>
+      <a href="/collections">Collections</a>
+      <a href="/pages/about">About</a>
+    </nav>
+    <div class="header__actions">
+      <a href="{{ routes.cart_url }}">Cart</a>
+    </div>
+  </div>
+</header>
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "Dark"
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "label": "Logo position",
+      "default": "middle-center",
+      "options": [
+        {"value": "left", "label": "Left"},
+        {"value": "middle-center", "label": "Center"},
+        {"value": "right", "label": "Right"}
+      ]
+    }
+  ]
+}
+{% endschema %}
