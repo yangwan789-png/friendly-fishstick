@@ -216,125 +216,187 @@
   <div class="featured-container">
     <div class="section-header">
       <h2 class="section-title">Featured <span>Products</span></h2>
-      <p class="section-subtitle">Handpicked selection of our most popular art prints</p>
+      <p class="section-subtitle">{{ section.settings.subtitle }}</p>
     </div>
 
     <div class="products-grid">
-      <article class="product-card">
-        <div class="product-image-wrapper">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=naruto%20uzumaki%20anime%20art%20print%20portrait%20dark%20background&image_size=portrait_4_3" alt="Naruto Uzumaki" class="product-image">
-          <span class="product-badge new">New</span>
-          <button class="product-quick-add" aria-label="Add to cart">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-          </button>
-        </div>
-        <div class="product-info">
-          <span class="product-category">Naruto</span>
-          <h3 class="product-title">Naruto Uzumaki - Sage Mode</h3>
-          <p class="product-description">High-quality art print featuring Naruto in Sage Mode</p>
-          <div class="product-rating">
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="rating-count">(128)</span>
+      {% if section.settings.products != blank %}
+        {% for product in section.settings.products %}
+          <article class="product-card">
+            <div class="product-image-wrapper">
+              <a href="{{ product.url }}">
+                <img src="{{ product.featured_image | img_url: '500x667' }}" alt="{{ product.title }}" class="product-image">
+              </a>
+              {% if product.tags contains 'new' %}
+                <span class="product-badge new">New</span>
+              {% endif %}
+              {% if product.tags contains 'sale' %}
+                <span class="product-badge sale">Sale</span>
+              {% endif %}
+              <button class="product-quick-add" aria-label="Add to cart">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">{{ product.tags | first | replace: '-', ' ' | capitalize }}</span>
+              <h3 class="product-title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+              <p class="product-description">{{ product.description | strip_html | truncate: 80 }}</p>
+              <div class="product-rating">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="rating-count">({{ product.metafields.custom.review_count | default: 100 }})</span>
+              </div>
+              <div class="product-price">
+                <span class="price-current">{{ product.price | money }}</span>
+                {% if product.compare_at_price > product.price %}
+                  <span class="price-original">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="product-card">
+          <div class="product-image-wrapper">
+            <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=naruto%20uzumaki%20anime%20art%20print%20portrait%20dark%20background&image_size=portrait_4_3" alt="Naruto Uzumaki" class="product-image">
+            <span class="product-badge new">New</span>
+            <button class="product-quick-add" aria-label="Add to cart">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </button>
           </div>
-          <div class="product-price">
-            <span class="price-current">$29.99</span>
+          <div class="product-info">
+            <span class="product-category">Naruto</span>
+            <h3 class="product-title">Naruto Uzumaki - Sage Mode</h3>
+            <p class="product-description">High-quality art print featuring Naruto in Sage Mode</p>
+            <div class="product-rating">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="rating-count">(128)</span>
+            </div>
+            <div class="product-price">
+              <span class="price-current">$29.99</span>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <article class="product-card">
-        <div class="product-image-wrapper">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=sasuke%20uchiha%20anime%20art%20print%20portrait%20dark%20background&image_size=portrait_4_3" alt="Sasuke Uchiha" class="product-image">
-          <span class="product-badge sale">Sale</span>
-          <button class="product-quick-add" aria-label="Add to cart">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-          </button>
-        </div>
-        <div class="product-info">
-          <span class="product-category">Naruto</span>
-          <h3 class="product-title">Sasuke Uchiha - Sharingan</h3>
-          <p class="product-description">Premium art print of Sasuke with Mangekyo Sharingan</p>
-          <div class="product-rating">
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">☆</span>
-            <span class="rating-count">(96)</span>
+        <article class="product-card">
+          <div class="product-image-wrapper">
+            <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=sasuke%20uchiha%20anime%20art%20print%20portrait%20dark%20background&image_size=portrait_4_3" alt="Sasuke Uchiha" class="product-image">
+            <span class="product-badge sale">Sale</span>
+            <button class="product-quick-add" aria-label="Add to cart">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </button>
           </div>
-          <div class="product-price">
-            <span class="price-current">$24.99</span>
-            <span class="price-original">$29.99</span>
+          <div class="product-info">
+            <span class="product-category">Naruto</span>
+            <h3 class="product-title">Sasuke Uchiha - Sharingan</h3>
+            <p class="product-description">Premium art print of Sasuke with Mangekyo Sharingan</p>
+            <div class="product-rating">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">☆</span>
+              <span class="rating-count">(96)</span>
+            </div>
+            <div class="product-price">
+              <span class="price-current">$24.99</span>
+              <span class="price-original">$29.99</span>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <article class="product-card">
-        <div class="product-image-wrapper">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=monkey%20d%20luffy%20one%20piece%20art%20print%20portrait%20dark%20background&image_size=portrait_4_3" alt="Monkey D. Luffy" class="product-image">
-          <span class="product-badge new">New</span>
-          <button class="product-quick-add" aria-label="Add to cart">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-          </button>
-        </div>
-        <div class="product-info">
-          <span class="product-category">One Piece</span>
-          <h3 class="product-title">Monkey D. Luffy - Gear Fourth</h3>
-          <p class="product-description">Epic art print of Luffy in Gear Fourth form</p>
-          <div class="product-rating">
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="rating-count">(156)</span>
+        <article class="product-card">
+          <div class="product-image-wrapper">
+            <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=monkey%20d%20luffy%20one%20piece%20art%20print%20portrait%20dark%20background&image_size=portrait_4_3" alt="Monkey D. Luffy" class="product-image">
+            <span class="product-badge new">New</span>
+            <button class="product-quick-add" aria-label="Add to cart">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </button>
           </div>
-          <div class="product-price">
-            <span class="price-current">$34.99</span>
+          <div class="product-info">
+            <span class="product-category">One Piece</span>
+            <h3 class="product-title">Monkey D. Luffy - Gear Fourth</h3>
+            <p class="product-description">Epic art print of Luffy in Gear Fourth form</p>
+            <div class="product-rating">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="rating-count">(156)</span>
+            </div>
+            <div class="product-price">
+              <span class="price-current">$34.99</span>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <article class="product-card">
-        <div class="product-image-wrapper">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=goku%20super%20saiyan%20dragon%20ball%20art%20print%20portrait%20dark%20background&image_size=portrait_4_3" alt="Goku Super Saiyan" class="product-image">
-          <button class="product-quick-add" aria-label="Add to cart">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-          </button>
-        </div>
-        <div class="product-info">
-          <span class="product-category">Dragon Ball</span>
-          <h3 class="product-title">Goku - Super Saiyan Blue</h3>
-          <p class="product-description">Stunning art print of Goku in Super Saiyan Blue form</p>
-          <div class="product-rating">
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">☆</span>
-            <span class="rating-count">(112)</span>
+        <article class="product-card">
+          <div class="product-image-wrapper">
+            <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=goku%20super%20saiyan%20dragon%20ball%20art%20print%20portrait%20dark%20background&image_size=portrait_4_3" alt="Goku Super Saiyan" class="product-image">
+            <button class="product-quick-add" aria-label="Add to cart">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </button>
           </div>
-          <div class="product-price">
-            <span class="price-current">$39.99</span>
+          <div class="product-info">
+            <span class="product-category">Dragon Ball</span>
+            <h3 class="product-title">Goku - Super Saiyan Blue</h3>
+            <p class="product-description">Stunning art print of Goku in Super Saiyan Blue form</p>
+            <div class="product-rating">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">☆</span>
+              <span class="rating-count">(112)</span>
+            </div>
+            <div class="product-price">
+              <span class="price-current">$39.99</span>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      {% endif %}
     </div>
 
     <div style="text-align: center; margin-top: 48px;">
       <a href="/collections/all" class="btn btn-outline">View All Products</a>
     </div>
   </div>
+
+  {% schema %}
+    {
+      "name": "Featured Products",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Handpicked selection of our most popular art prints"
+        },
+        {
+          "type": "product_list",
+          "id": "products",
+          "label": "Products",
+          "info": "Select products to display"
+        }
+      ]
+    }
+  {% endschema %}
 </section>

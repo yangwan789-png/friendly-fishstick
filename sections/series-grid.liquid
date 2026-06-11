@@ -181,69 +181,108 @@
   <div class="series-container">
     <div class="section-header">
       <h2 class="section-title">Explore Popular <span>Series</span></h2>
-      <p class="section-subtitle">Discover art prints from your favorite anime series</p>
+      <p class="section-subtitle">{{ section.settings.subtitle }}</p>
     </div>
 
     <div class="series-grid">
-      <a href="/collections/naruto" class="series-card">
-        <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=naruto%20anime%20series%20hero%20shot%20dramatic%20dark%20background%20orange%20theme&image_size=portrait_4_3" alt="Naruto" class="series-card-image">
-        <div class="series-card-overlay">
-          <span class="series-card-badge">50+ Prints</span>
-          <h3 class="series-card-title">Naruto</h3>
-          <p class="series-card-count">Characters: Naruto, Sasuke, Sakura, Kakashi, Itachi</p>
-          <span class="series-card-button">
-            View Collection
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </span>
-        </div>
-      </a>
+      {% if section.settings.collections != blank %}
+        {% for collection in section.settings.collections %}
+          <a href="{{ collection.url }}" class="series-card">
+            <img src="{{ collection.image | img_url: '600x750' }}" alt="{{ collection.title }}" class="series-card-image">
+            <div class="series-card-overlay">
+              <span class="series-card-badge">{{ collection.products_count }}+ Prints</span>
+              <h3 class="series-card-title">{{ collection.title }}</h3>
+              <p class="series-card-count">{{ collection.description | strip_html | truncate: 60 }}</p>
+              <span class="series-card-button">
+                View Collection
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </div>
+          </a>
+        {% endfor %}
+      {% else %}
+        <a href="/collections/naruto" class="series-card">
+          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=naruto%20anime%20series%20hero%20shot%20dramatic%20dark%20background%20orange%20theme&image_size=portrait_4_3" alt="Naruto" class="series-card-image">
+          <div class="series-card-overlay">
+            <span class="series-card-badge">50+ Prints</span>
+            <h3 class="series-card-title">Naruto</h3>
+            <p class="series-card-count">Characters: Naruto, Sasuke, Sakura, Kakashi, Itachi</p>
+            <span class="series-card-button">
+              View Collection
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </span>
+          </div>
+        </a>
 
-      <a href="/collections/one-piece" class="series-card">
-        <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=one%20piece%20anime%20series%20luffy%20dramatic%20dark%20background%20red%20theme&image_size=portrait_4_3" alt="One Piece" class="series-card-image">
-        <div class="series-card-overlay">
-          <span class="series-card-badge">60+ Prints</span>
-          <h3 class="series-card-title">One Piece</h3>
-          <p class="series-card-count">Characters: Luffy, Zoro, Nami, Sanji, Chopper</p>
-          <span class="series-card-button">
-            View Collection
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </span>
-        </div>
-      </a>
+        <a href="/collections/one-piece" class="series-card">
+          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=one%20piece%20anime%20series%20luffy%20dramatic%20dark%20background%20red%20theme&image_size=portrait_4_3" alt="One Piece" class="series-card-image">
+          <div class="series-card-overlay">
+            <span class="series-card-badge">60+ Prints</span>
+            <h3 class="series-card-title">One Piece</h3>
+            <p class="series-card-count">Characters: Luffy, Zoro, Nami, Sanji, Chopper</p>
+            <span class="series-card-button">
+              View Collection
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </span>
+          </div>
+        </a>
 
-      <a href="/collections/dragon-ball" class="series-card">
-        <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=dragon%20ball%20goku%20super%20saiyan%20dramatic%20dark%20background%20yellow%20aura&image_size=portrait_4_3" alt="Dragon Ball" class="series-card-image">
-        <div class="series-card-overlay">
-          <span class="series-card-badge">45+ Prints</span>
-          <h3 class="series-card-title">Dragon Ball</h3>
-          <p class="series-card-count">Characters: Goku, Vegeta, Piccolo, Gohan, Frieza</p>
-          <span class="series-card-button">
-            View Collection
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </span>
-        </div>
-      </a>
+        <a href="/collections/dragon-ball" class="series-card">
+          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=dragon%20ball%20goku%20super%20saiyan%20dramatic%20dark%20background%20yellow%20aura&image_size=portrait_4_3" alt="Dragon Ball" class="series-card-image">
+          <div class="series-card-overlay">
+            <span class="series-card-badge">45+ Prints</span>
+            <h3 class="series-card-title">Dragon Ball</h3>
+            <p class="series-card-count">Characters: Goku, Vegeta, Piccolo, Gohan, Frieza</p>
+            <span class="series-card-button">
+              View Collection
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </span>
+          </div>
+        </a>
 
-      <a href="/collections/marvel" class="series-card">
-        <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=marvel%20superheroes%20team%20dramatic%20dark%20background%20epic%20pose&image_size=portrait_4_3" alt="Marvel" class="series-card-image">
-        <div class="series-card-overlay">
-          <span class="series-card-badge">70+ Prints</span>
-          <h3 class="series-card-title">Marvel</h3>
-          <p class="series-card-count">Characters: Spider-Man, Iron Man, Captain America, Thor, Black Widow</p>
-          <span class="series-card-button">
-            View Collection
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </span>
-        </div>
-      </a>
+        <a href="/collections/marvel" class="series-card">
+          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=marvel%20superheroes%20team%20dramatic%20dark%20background%20epic%20pose&image_size=portrait_4_3" alt="Marvel" class="series-card-image">
+          <div class="series-card-overlay">
+            <span class="series-card-badge">70+ Prints</span>
+            <h3 class="series-card-title">Marvel</h3>
+            <p class="series-card-count">Characters: Spider-Man, Iron Man, Captain America, Thor, Black Widow</p>
+            <span class="series-card-button">
+              View Collection
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </span>
+          </div>
+        </a>
+      {% endif %}
     </div>
   </div>
+
+  {% schema %}
+    {
+      "name": "Series Grid",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Discover art prints from your favorite anime series"
+        },
+        {
+          "type": "collection_list",
+          "id": "collections",
+          "label": "Collections",
+          "info": "Select collections to display as series cards"
+        }
+      ]
+    }
+  {% endschema %}
 </section>
