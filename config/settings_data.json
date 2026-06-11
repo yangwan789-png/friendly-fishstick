@@ -1,8 +1,8 @@
 {
   "current": {
+    "color_scheme": "Dark",
     "type_header_font": "dm_sans_n5",
-    "type_body_font": "jost_n4",
-    "color_scheme": "Dark"
+    "type_body_font": "jost_n4"
   },
   "presets": [
     {

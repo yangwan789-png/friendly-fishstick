@@ -1,39 +1,38 @@
-[
-  {
-    "name": "theme_info",
-    "theme_name": "MangaKing",
-    "theme_version": "1.0.0",
-    "theme_author": "MangaKing",
-    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://support.shopify.com/"
+{
+  "name": "theme_info",
+  "theme_name": "MangaKing",
+  "theme_version": "1.0.0",
+  "theme_author": "MangaKing",
+  "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+  "theme_support_url": "https://support.shopify.com/",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": []
+    },
+    "footer": {
+      "type": "footer",
+      "settings": []
+    }
   },
-  {
-    "name": "Colors",
-    "settings": [
-      {
-        "type": "color_scheme",
-        "id": "color_scheme",
-        "label": "Color scheme",
-        "default": "Dark",
-        "collections": ["all"]
-      }
-    ]
-  },
-  {
-    "name": "Typography",
-    "settings": [
-      {
-        "type": "font_picker",
-        "id": "type_header_font",
-        "default": "dm_sans_n5",
-        "label": "Heading font"
-      },
-      {
-        "type": "font_picker",
-        "id": "type_body_font",
-        "default": "jost_n4",
-        "label": "Body font"
-      }
-    ]
-  }
-]
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "Dark"
+    },
+    {
+      "type": "font_picker",
+      "id": "type_header_font",
+      "default": "dm_sans_n5",
+      "label": "Heading font"
+    },
+    {
+      "type": "font_picker",
+      "id": "type_body_font",
+      "default": "jost_n4",
+      "label": "Body font"
+    }
+  ]
+}
