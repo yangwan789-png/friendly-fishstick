@@ -1,14 +1,26 @@
 <section class="collection-list">
   {% if section.settings.heading != blank %}
-    <h2>{{ section.settings.heading }}</h2>
+    <h2 class="collection-list__heading">{{ section.settings.heading }}</h2>
   {% endif %}
-  <div class="collection-list__grid">
+  <div class="collection-list__grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
     {% for collection in collections %}
-      <a href="{{ collection.url }}" class="collection-list__item">
-        {% if collection.featured_image %}
-          {{ collection.featured_image | image_url: width: 400 | image_tag: alt: collection.title }}
-        {% endif %}
-        <h3>{{ collection.title }}</h3>
+      <a href="{{ collection.url }}" class="collection-list__item card">
+        <div class="card__image-wrapper">
+          {% if collection.featured_image %}
+            {{ collection.featured_image | image_url: width: 300 | image_tag: alt: collection.title, class: 'card__image' }}
+          {% else %}
+            <div class="card__placeholder">
+              <span class="card__placeholder-text">{{ collection.title | truncate: 2 }}</span>
+            </div>
+          {% endif %}
+        </div>
+        <div class="card__content">
+          <h3 class="card__title">{{ collection.title }}</h3>
+          <p class="card__product-count">{{ collection.products_count }} products</p>
+        </div>
+        <div class="card__overlay">
+          <span class="card__arrow">View Collection</span>
+        </div>
       </a>
     {% endfor %}
   </div>
