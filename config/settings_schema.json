@@ -1,4 +1,11 @@
 {
+  "$schema": "https://shopify.dev/themes/schema/settings_schema.json",
+  "name": "theme_info",
+  "theme_name": "MangaKing",
+  "theme_version": "1.0.0",
+  "theme_author": "MangaKing",
+  "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+  "theme_support_url": "https://support.shopify.com/",
   "sections": {
     "header": {
       "type": "header",
@@ -11,10 +18,66 @@
   },
   "settings": [
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
+      "type": "color_scheme_group",
+      "id": "color_scheme_group",
       "label": "Color scheme",
-      "default": "Default"
+      "default": "dark",
+      "choices": [
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Background",
+          "key": "bg"
+        },
+        {
+          "name": "Text",
+          "key": "text"
+        },
+        {
+          "name": "Accent 1",
+          "key": "accent_1"
+        },
+        {
+          "name": "Accent 2",
+          "key": "accent_2"
+        },
+        {
+          "name": "Accent 3",
+          "key": "accent_3"
+        },
+        {
+          "name": "Accent 4",
+          "key": "accent_4"
+        },
+        {
+          "name": "Background Secondary",
+          "key": "bg_secondary"
+        },
+        {
+          "name": "Text Subdued",
+          "key": "text_subdued"
+        },
+        {
+          "name": "Border",
+          "key": "border"
+        },
+        {
+          "name": "Gradient Left",
+          "key": "gradient_left"
+        },
+        {
+          "name": "Gradient Right",
+          "key": "gradient_right"
+        }
+      ]
     },
     {
       "type": "font_picker",
