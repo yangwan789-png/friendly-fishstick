@@ -1,15 +1,40 @@
-<section class="slideshow">
+<section class="hero-section">
   {% for block in section.blocks %}
-    <div class="slideshow__slide">
+    <div class="hero-content">
       {% if block.settings.headline != blank %}
-        <h2>{{ block.settings.headline }}</h2>
+        <p class="hero-content__pre-title">Premium Anime Art</p>
+        <h1 class="hero-content__title">
+          <span class="hero-content__title-gradient">{{ block.settings.headline }}</span>
+        </h1>
       {% endif %}
       {% if block.settings.subheading != blank %}
-        <p>{{ block.settings.subheading }}</p>
+        <p class="hero-content__subtitle">{{ block.settings.subheading }}</p>
       {% endif %}
       {% if block.settings.button_label != blank %}
-        <a href="{{ block.settings.button_link }}" class="button">{{ block.settings.button_label }}</a>
+        <div class="hero-content__buttons">
+          <a href="{{ block.settings.button_link }}" class="btn btn-primary">
+            {{ block.settings.button_label }}
+            <span>→</span>
+          </a>
+          <a href="/collections/all" class="btn btn-secondary">
+            View All Collections
+          </a>
+        </div>
       {% endif %}
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat__value">1000+</div>
+          <div class="hero-stat__label">Art Prints</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat__value">50+</div>
+          <div class="hero-stat__label">Anime Series</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat__value">50K+</div>
+          <div class="hero-stat__label">Happy Customers</div>
+        </div>
+      </div>
     </div>
   {% endfor %}
 </section>

@@ -1,7 +1,58 @@
 <footer class="footer">
-  <div class="footer__content">
-    <div class="footer__copyright">
-      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All anime IP rights belong to their original owners.</p>
+  <div class="footer-content">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="{{ routes.root_url }}" class="footer-brand__logo">
+          <div class="footer-brand__logo-icon">MK</div>
+          <span class="footer-brand__logo-text">{{ shop.name }}</span>
+        </a>
+        <p class="footer-brand__description">
+          Premium anime art prints featuring your favorite characters from top anime series.
+        </p>
+        <div class="footer-brand__social">
+          <a href="#" class="footer-social__link">📱</a>
+          <a href="#" class="footer-social__link">📷</a>
+          <a href="#" class="footer-social__link">🐦</a>
+          <a href="#" class="footer-social__link">💬</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-section__title">Shop</h3>
+        <div class="footer-section__links">
+          <a href="/collections/all" class="footer-section__link">All Products</a>
+          <a href="/collections" class="footer-section__link">Collections</a>
+          <a href="/pages/new-arrivals" class="footer-section__link">New Arrivals</a>
+          <a href="/pages/best-sellers" class="footer-section__link">Best Sellers</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-section__title">About</h3>
+        <div class="footer-section__links">
+          <a href="/pages/about" class="footer-section__link">Our Story</a>
+          <a href="/pages/shipping" class="footer-section__link">Shipping Info</a>
+          <a href="/pages/returns" class="footer-section__link">Returns & Refunds</a>
+          <a href="/pages/contact" class="footer-section__link">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-section__title">Legal</h3>
+        <div class="footer-section__links">
+          <a href="/pages/privacy-policy" class="footer-section__link">Privacy Policy</a>
+          <a href="/pages/terms-of-service" class="footer-section__link">Terms of Service</a>
+          <a href="/pages/cookie-policy" class="footer-section__link">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom__copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All anime IP rights belong to their original owners.
+      </div>
+      <div class="footer-bottom__payment">
+        <span class="footer-payment__item">💳</span>
+        <span class="footer-payment__item">💵</span>
+        <span class="footer-payment__item">💰</span>
+        <span class="footer-payment__item">🔷</span>
+      </div>
     </div>
   </div>
 </footer>

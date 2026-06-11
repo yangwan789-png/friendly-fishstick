@@ -1,19 +1,30 @@
 <header class="header">
   <div class="header__content">
     <a href="{{ routes.root_url }}" class="header__logo">
-      {% if settings.logo != blank %}
-        {{ settings.logo | image_url: width: settings.logo_width | image_tag: alt: shop.name }}
-      {% else %}
-        <span>{{ shop.name }}</span>
-      {% endif %}
+      <div class="header__logo-icon">MK</div>
+      <span class="header__logo-text">{{ shop.name }}</span>
     </a>
     <nav class="header__navigation">
-      <a href="/collections/all">All Products</a>
-      <a href="/collections">Collections</a>
-      <a href="/pages/about">About</a>
+      <a href="/collections/all" class="header__nav-link">All Products</a>
+      <a href="/collections" class="header__nav-link">Collections</a>
+      <a href="/pages/about" class="header__nav-link">About</a>
     </nav>
     <div class="header__actions">
-      <a href="{{ routes.cart_url }}">Cart</a>
+      <a href="{{ routes.search_url }}" class="header__action-link">
+        <span>🔍</span>
+      </a>
+      <a href="{{ routes.account_url }}" class="header__action-link">
+        <span>👤</span>
+      </a>
+      <a href="{{ routes.cart_url }}" class="header__action-link">
+        <span>🛒</span>
+        {% if cart.item_count > 0 %}
+          <span class="header__cart-count">{{ cart.item_count }}</span>
+        {% endif %}
+      </a>
+      <button class="header__mobile-toggle">
+        <span>☰</span>
+      </button>
     </div>
   </div>
 </header>

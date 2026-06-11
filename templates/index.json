@@ -1,14 +1,21 @@
 {
   "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "Free shipping on orders over $50",
+        "color_scheme": "accent_1"
+      }
+    },
     "slideshow": {
       "type": "slideshow",
       "blocks": {
         "slide1": {
           "type": "slide",
           "settings": {
-            "headline": "Welcome to MangaKing",
-            "subheading": "Explore amazing anime art prints",
-            "button_label": "Shop Now",
+            "headline": "Discover Amazing Anime Art",
+            "subheading": "Premium quality prints featuring your favorite characters",
+            "button_label": "Explore Collection",
             "button_link": "/collections/all"
           }
         }
@@ -22,8 +29,7 @@
     "collection-list": {
       "type": "collection-list",
       "settings": {
-        "heading": "Popular Collections",
-        "collections_to_show": "all",
+        "heading": "Popular Anime Series",
         "color_scheme": "Dark"
       }
     },
@@ -31,10 +37,25 @@
       "type": "featured-collection",
       "settings": {
         "collection": "all",
-        "heading": "Featured Prints",
+        "heading": "Featured Art Prints",
+        "color_scheme": "Dark"
+      }
+    },
+    "testimonials": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "Customer Reviews",
+        "color_scheme": "Dark"
+      }
+    },
+    "newsletter": {
+      "type": "email-signup-banner",
+      "settings": {
+        "heading": "Join Our Community",
+        "subheading": "Get exclusive deals and new arrivals",
         "color_scheme": "Dark"
       }
     }
   },
-  "order": ["slideshow", "collection-list", "featured-collection"]
+  "order": ["announcement-bar", "slideshow", "collection-list", "featured-collection", "testimonials", "newsletter"]
 }
