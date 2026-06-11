@@ -4,16 +4,12 @@
       "type": "hero-section",
       "settings": {}
     },
-    "collections": {
-      "type": "collection-grid",
+    "series-grid": {
+      "type": "series-grid",
       "settings": {}
     },
     "featured": {
       "type": "featured-products",
-      "settings": {}
-    },
-    "testimonials": {
-      "type": "testimonials",
       "settings": {}
     },
     "newsletter": {
@@ -21,5 +17,5 @@
       "settings": {}
     }
   },
-  "order": ["hero", "collections", "featured", "testimonials", "newsletter"]
+  "order": ["hero", "series-grid", "featured", "newsletter"]
 }

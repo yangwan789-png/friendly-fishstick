@@ -4,8 +4,12 @@
       "type": "collection-banner",
       "settings": {}
     },
-    "collection-filters": {
-      "type": "collection-filters",
+    "character-filters": {
+      "type": "character-filters",
+      "settings": {}
+    },
+    "style-tabs": {
+      "type": "style-tabs",
       "settings": {}
     },
     "collection-products": {
@@ -13,5 +17,5 @@
       "settings": {}
     }
   },
-  "order": ["collection-banner", "collection-filters", "collection-products"]
+  "order": ["collection-banner", "character-filters", "style-tabs", "collection-products"]
 }

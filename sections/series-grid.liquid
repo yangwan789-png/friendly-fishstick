@@ -1,0 +1,41 @@
+<section class="series-section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-header__subtitle">Explore Series</p>
+      <h2 class="section-header__title">Popular Anime Series</h2>
+      <p class="section-header__description">Browse our collection by your favorite anime series</p>
+    </div>
+    
+    <div class="series-grid">
+      {% for collection in collections.all %}
+        {% if collection.handle != 'all' %}
+          <a href="/collections/{{ collection.handle }}" class="series-card">
+            <div class="series-card__image-wrapper">
+              {% if collection.image %}
+                <img src="{{ collection.image.src | img_url: 'large' }}" alt="{{ collection.title }}" class="series-card__image">
+              {% else %}
+                <div class="series-card__placeholder">
+                  <span>{{ collection.title | slice: 0, 2 }}</span>
+                </div>
+              {% endif %}
+              <div class="series-card__gradient"></div>
+            </div>
+            <div class="series-card__content">
+              <h3 class="series-card__title">{{ collection.title }}</h3>
+              <div class="series-card__info">
+                <span class="series-card__count">{{ collection.products_count }} art prints</span>
+              </div>
+              <div class="series-card__arrow">→</div>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Series Grid",
+  "settings": []
+}
+{% endschema %}
