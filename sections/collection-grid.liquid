@@ -1,0 +1,40 @@
+<section class="collections-section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-header__subtitle">Popular Series</p>
+      <h2 class="section-header__title">Explore Anime Collections</h2>
+      <p class="section-header__description">Discover amazing art prints from your favorite anime series</p>
+    </div>
+    <div class="collections-grid">
+      {% for collection in collections.all %}
+        {% if collection.handle != 'all' %}
+          <a href="{{ collection.url }}" class="collection-card">
+            <div class="collection-card__image-wrapper">
+              {% if collection.image %}
+                <img src="{{ collection.image.src | img_url: 'large' }}" alt="{{ collection.title }}" class="collection-card__image">
+              {% else %}
+                <div class="collection-card__placeholder">
+                  <span>{{ collection.title | slice: 0, 2 }}</span>
+                </div>
+              {% endif %}
+              <div class="collection-card__image-overlay"></div>
+              <div class="collection-card__hover-content">
+                <span class="collection-card__view-btn">View Collection</span>
+              </div>
+            </div>
+            <div class="collection-card__content">
+              <h3 class="collection-card__title">{{ collection.title }}</h3>
+              <p class="collection-card__count">{{ collection.products_count }} products</p>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Collection Grid",
+  "settings": []
+}
+{% endschema %}

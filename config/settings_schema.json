@@ -11,81 +11,11 @@
     "name": "Colors",
     "settings": [
       {
-        "type": "color_scheme_group",
-        "id": "color_schemes",
-        "label": "Color schemes",
-        "definition": [
-          {
-            "type": "color",
-            "id": "background",
-            "label": "Background",
-            "default": "#0a0a0f"
-          },
-          {
-            "type": "color",
-            "id": "text",
-            "label": "Text",
-            "default": "#ffffff"
-          },
-          {
-            "type": "color",
-            "id": "accent_1",
-            "label": "Accent 1",
-            "default": "#ff2a6d"
-          },
-          {
-            "type": "color",
-            "id": "accent_2",
-            "label": "Accent 2",
-            "default": "#05d9e8"
-          },
-          {
-            "type": "color",
-            "id": "border",
-            "label": "Border",
-            "default": "#2a2a35"
-          },
-          {
-            "type": "color",
-            "id": "background_secondary",
-            "label": "Background secondary",
-            "default": "#111118"
-          },
-          {
-            "type": "color",
-            "id": "text_subdued",
-            "label": "Text subdued",
-            "default": "#555566"
-          },
-          {
-            "type": "color",
-            "id": "button",
-            "label": "Button",
-            "default": "#ff2a6d"
-          },
-          {
-            "type": "color",
-            "id": "button_label",
-            "label": "Button text",
-            "default": "#ffffff"
-          }
-        ],
-        "role": {
-          "text": "text",
-          "text_subdued": "text_subdued",
-          "background": {
-            "solid": "background"
-          },
-          "background_secondary": "background_secondary",
-          "accent_1": "accent_1",
-          "accent_2": "accent_2",
-          "borders": "border",
-          "links": "accent_2",
-          "icons": "text",
-          "primary_button": "button",
-          "on_primary_button": "button_label",
-          "primary_button_border": "button"
-        }
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "Color scheme",
+        "default": "Dark",
+        "collections": ["all"]
       }
     ]
   },

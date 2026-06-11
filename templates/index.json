@@ -1,61 +1,25 @@
 {
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "settings": {
-        "text": "Free shipping on orders over $50",
-        "color_scheme": "accent_1"
-      }
+    "hero": {
+      "type": "hero-section",
+      "settings": {}
     },
-    "slideshow": {
-      "type": "slideshow",
-      "blocks": {
-        "slide1": {
-          "type": "slide",
-          "settings": {
-            "headline": "Discover Amazing Anime Art",
-            "subheading": "Premium quality prints featuring your favorite characters",
-            "button_label": "Explore Collection",
-            "button_link": "/collections/all"
-          }
-        }
-      },
-      "block_order": ["slide1"],
-      "settings": {
-        "height": "large",
-        "color_scheme": "Dark"
-      }
+    "collections": {
+      "type": "collection-grid",
+      "settings": {}
     },
-    "collection-list": {
-      "type": "collection-list",
-      "settings": {
-        "heading": "Popular Anime Series",
-        "color_scheme": "Dark"
-      }
-    },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "all",
-        "heading": "Featured Art Prints",
-        "color_scheme": "Dark"
-      }
+    "featured": {
+      "type": "featured-products",
+      "settings": {}
     },
     "testimonials": {
-      "type": "rich-text",
-      "settings": {
-        "heading": "Customer Reviews",
-        "color_scheme": "Dark"
-      }
+      "type": "testimonials",
+      "settings": {}
     },
     "newsletter": {
-      "type": "email-signup-banner",
-      "settings": {
-        "heading": "Join Our Community",
-        "subheading": "Get exclusive deals and new arrivals",
-        "color_scheme": "Dark"
-      }
+      "type": "newsletter",
+      "settings": {}
     }
   },
-  "order": ["announcement-bar", "slideshow", "collection-list", "featured-collection", "testimonials", "newsletter"]
+  "order": ["hero", "collections", "featured", "testimonials", "newsletter"]
 }

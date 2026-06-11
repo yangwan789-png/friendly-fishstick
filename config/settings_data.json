@@ -2,33 +2,14 @@
   "current": {
     "type_header_font": "dm_sans_n5",
     "type_body_font": "jost_n4",
-    "color_schemes": {
-      "background": "#0a0a0f",
-      "text": "#ffffff",
-      "accent_1": "#ff2a6d",
-      "accent_2": "#05d9e8",
-      "border": "#2a2a35",
-      "background_secondary": "#111118",
-      "text_subdued": "#555566",
-      "button": "#ff2a6d",
-      "button_label": "#ffffff"
-    }
+    "color_scheme": "Dark"
   },
   "presets": [
     {
       "name": "Dark",
+      "category": "Dark",
       "settings": {
-        "color_schemes": {
-          "background": "#0a0a0f",
-          "text": "#ffffff",
-          "accent_1": "#ff2a6d",
-          "accent_2": "#05d9e8",
-          "border": "#2a2a35",
-          "background_secondary": "#111118",
-          "text_subdued": "#555566",
-          "button": "#ff2a6d",
-          "button_label": "#ffffff"
-        }
+        "color_scheme": "Dark"
       }
     }
   ]
