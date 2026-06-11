@@ -1,40 +1,221 @@
-<!doctype html>
-<html class="js" lang="{{ request.locale.iso_code }}">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>
+<!DOCTYPE html>
+<html lang="{{ shop.locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="description" content="{{ shop.description | escape }}">
+  <title>
+    {% if page_title %}
       {{ page_title }}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-    </title>
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
+    {% elsif product %}
+      {{ product.title | escape }} - {{ shop.name }}
+    {% elsif collection %}
+      {{ collection.title | escape }} - {{ shop.name }}
+    {% else %}
+      {{ shop.name }}
     {% endif %}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --color-background: {{ settings.color_schemes.background }};
-        --color-text: {{ settings.color_schemes.text }};
-        --color-accent-1: {{ settings.color_schemes.accent_1 }};
-        --color-accent-2: {{ settings.color_schemes.accent_2 }};
-        --color-border: {{ settings.color_schemes.border }};
-        --color-background-secondary: {{ settings.color_schemes.background_secondary }};
-        --color-text-subdued: {{ settings.color_schemes.text_subdued }};
-        --color-button: {{ settings.color_schemes.button }};
+  </title>
+  {% if template == 'product' %}
+    <link rel="canonical" href="{{ product.url }}">
+  {% endif %}
+  {{ content_for_header }}
+  <style>
+    :root {
+      --color-primary: #ff2a6d;
+      --color-secondary: #05d9e8;
+      --color-accent: #a855f7;
+      --color-bg: #0a0a0f;
+      --color-bg-secondary: #111118;
+      --color-bg-card: #16161d;
+      --color-text: #ffffff;
+      --color-text-subdued: #888899;
+      --color-border: #2a2a35;
+      --font-heading: 'DM Sans', sans-serif;
+      --font-body: 'Jost', sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 40px rgba(255, 42, 109, 0.3);
+      --shadow-glow-cyan: 0 0 40px rgba(5, 217, 232, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+    }
+
+    a {
+      color: var(--color-text);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--color-primary);
+    }
+
+    button {
+      font-family: var(--font-heading);
+      cursor: pointer;
+      border: none;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 32px;
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: var(--radius-full);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      color: white;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-text);
+      border: 2px solid var(--color-border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-secondary);
+      border: 2px solid var(--color-secondary);
+    }
+
+    .btn-outline:hover {
+      background: var(--color-secondary);
+      color: var(--color-bg);
+      box-shadow: var(--shadow-glow-cyan);
+    }
+
+    .glow-text {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--color-text-subdued);
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-pulse {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .animate-gradient {
+      background-size: 200% 200%;
+      animation: gradient-shift 8s ease infinite;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
       }
-    </style>
-    {{ 'theme.css' | asset_url | stylesheet_tag }}
-    {{ content_for_header }}
-  </head>
-  <body>
-    {% sections 'header-group' %}
-    <main id="MainContent" class="content-for-layout" role="main">
-      {{ content_for_layout }}
-    </main>
-    {% sections 'footer-group' %}
-  </body>
+      
+      .btn {
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  {% section 'header' %}
+  <main id="MainContent" class="main-content" role="main">
+    {{ content_for_layout }}
+  </main>
+  {% section 'footer' %}
+  {{ content_for_footer }}
+</body>
 </html>

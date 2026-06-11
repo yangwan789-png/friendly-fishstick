@@ -1,44 +1,340 @@
 <section class="featured-section">
-  <div class="container">
+  <style>
+    .featured-section {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .featured-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 16px;
+    }
+
+    .section-title span {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--color-text-subdued);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .product-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .product-image-wrapper {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 12px;
+      background: var(--color-primary);
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .product-badge.new {
+      background: var(--color-secondary);
+      color: var(--color-bg);
+    }
+
+    .product-badge.sale {
+      background: #ef4444;
+    }
+
+    .product-quick-add {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .product-card:hover .product-quick-add {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .product-quick-add:hover {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-category {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .product-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .product-title:hover {
+      color: var(--color-primary);
+    }
+
+    .product-description {
+      font-size: 13px;
+      color: var(--color-text-subdued);
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .product-price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .price-current {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .price-original {
+      font-size: 1rem;
+      color: var(--color-text-subdued);
+      text-decoration: line-through;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+
+    .star {
+      font-size: 12px;
+      color: #fbbf24;
+    }
+
+    .rating-count {
+      font-size: 12px;
+      color: var(--color-text-subdued);
+      margin-left: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .featured-section {
+        padding: 60px 0;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+
+      .product-info {
+        padding: 16px;
+      }
+    }
+  </style>
+
+  <div class="featured-container">
     <div class="section-header">
-      <p class="section-header__subtitle">Featured</p>
-      <h2 class="section-header__title">Popular Art Prints</h2>
-      <p class="section-header__description">Our most popular anime art prints loved by fans</p>
+      <h2 class="section-title">Featured <span>Products</span></h2>
+      <p class="section-subtitle">Handpicked selection of our most popular art prints</p>
     </div>
-    <div class="featured-grid">
-      {% for product in collections.all.products limit: 8 %}
-        <a href="{{ product.url }}" class="product-card">
-          <div class="product-card__image-wrapper">
-            <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.title }}" class="product-card__image">
-            {% if product.tags contains 'New' %}
-              <span class="product-card__badge new">New</span>
-            {% endif %}
-            {% if product.compare_at_price > product.price %}
-              <span class="product-card__badge sale">Sale</span>
-            {% endif %}
+
+    <div class="products-grid">
+      <article class="product-card">
+        <div class="product-image-wrapper">
+          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=naruto%20uzumaki%20anime%20art%20print%20portrait%20dark%20background&image_size=portrait_4_3" alt="Naruto Uzumaki" class="product-image">
+          <span class="product-badge new">New</span>
+          <button class="product-quick-add" aria-label="Add to cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Naruto</span>
+          <h3 class="product-title">Naruto Uzumaki - Sage Mode</h3>
+          <p class="product-description">High-quality art print featuring Naruto in Sage Mode</p>
+          <div class="product-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="rating-count">(128)</span>
           </div>
-          <div class="product-card__content">
-            <span class="product-card__category">{{ product.collections.first.title }}</span>
-            <h3 class="product-card__title">{{ product.title }}</h3>
-            <div class="product-card__price">
-              {{ product.price | money }}
-              {% if product.compare_at_price > product.price %}
-                <span class="product-card__original-price">{{ product.compare_at_price | money }}</span>
-              {% endif %}
-            </div>
+          <div class="product-price">
+            <span class="price-current">$29.99</span>
           </div>
-          <button class="product-card__quick-add" aria-label="Add to cart">+</button>
-        </a>
-      {% endfor %}
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="product-image-wrapper">
+          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=sasuke%20uchiha%20anime%20art%20print%20portrait%20dark%20background&image_size=portrait_4_3" alt="Sasuke Uchiha" class="product-image">
+          <span class="product-badge sale">Sale</span>
+          <button class="product-quick-add" aria-label="Add to cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Naruto</span>
+          <h3 class="product-title">Sasuke Uchiha - Sharingan</h3>
+          <p class="product-description">Premium art print of Sasuke with Mangekyo Sharingan</p>
+          <div class="product-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="rating-count">(96)</span>
+          </div>
+          <div class="product-price">
+            <span class="price-current">$24.99</span>
+            <span class="price-original">$29.99</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="product-image-wrapper">
+          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=monkey%20d%20luffy%20one%20piece%20art%20print%20portrait%20dark%20background&image_size=portrait_4_3" alt="Monkey D. Luffy" class="product-image">
+          <span class="product-badge new">New</span>
+          <button class="product-quick-add" aria-label="Add to cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="product-info">
+          <span class="product-category">One Piece</span>
+          <h3 class="product-title">Monkey D. Luffy - Gear Fourth</h3>
+          <p class="product-description">Epic art print of Luffy in Gear Fourth form</p>
+          <div class="product-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="rating-count">(156)</span>
+          </div>
+          <div class="product-price">
+            <span class="price-current">$34.99</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="product-image-wrapper">
+          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=goku%20super%20saiyan%20dragon%20ball%20art%20print%20portrait%20dark%20background&image_size=portrait_4_3" alt="Goku Super Saiyan" class="product-image">
+          <button class="product-quick-add" aria-label="Add to cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Dragon Ball</span>
+          <h3 class="product-title">Goku - Super Saiyan Blue</h3>
+          <p class="product-description">Stunning art print of Goku in Super Saiyan Blue form</p>
+          <div class="product-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">☆</span>
+            <span class="rating-count">(112)</span>
+          </div>
+          <div class="product-price">
+            <span class="price-current">$39.99</span>
+          </div>
+        </div>
+      </article>
     </div>
-    <div class="text-center mt-8">
-      <a href="/collections/all" class="btn btn-secondary">View All Products</a>
+
+    <div style="text-align: center; margin-top: 48px;">
+      <a href="/collections/all" class="btn btn-outline">View All Products</a>
     </div>
   </div>
 </section>
-{% schema %}
-{
-  "name": "Featured Products",
-  "settings": []
-}
-{% endschema %}

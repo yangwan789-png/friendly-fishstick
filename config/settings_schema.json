@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "MangaKing",
-    "theme_version": "1.0.0",
+    "theme_version": "2.0.0",
     "theme_author": "MangaKing",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://support.shopify.com/"
@@ -13,6 +13,7 @@
       {
         "type": "color_scheme_group",
         "id": "color_schemes",
+        "label": "Color schemes",
         "definition": [
           {
             "type": "color",
@@ -34,7 +35,7 @@
           {
             "type": "color",
             "id": "button",
-            "label": "Button background",
+            "label": "Button",
             "default": "#121212"
           },
           {

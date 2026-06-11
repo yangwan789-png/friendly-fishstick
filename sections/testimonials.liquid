@@ -1,67 +1,223 @@
 <section class="testimonials-section">
-  <div class="container">
+  <style>
+    .testimonials-section {
+      padding: 80px 0;
+      background: var(--color-bg-secondary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonials-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 70%, rgba(255, 42, 109, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 30%, rgba(5, 217, 232, 0.08) 0%, transparent 50%);
+    }
+
+    .testimonials-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 16px;
+    }
+
+    .section-title span {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--color-text-subdued);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .testimonial-quote {
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(255, 42, 109, 0.2);
+      position: absolute;
+      top: 24px;
+      right: 24px;
+    }
+
+    .testimonial-content {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--color-text);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .author-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .author-name {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .author-title {
+      font-size: 13px;
+      color: var(--color-text-subdued);
+    }
+
+    .testimonial-rating {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+
+    .star {
+      font-size: 14px;
+      color: #fbbf24;
+    }
+
+    @media (max-width: 768px) {
+      .testimonials-section {
+        padding: 60px 0;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .testimonial-card {
+        padding: 24px;
+      }
+    }
+  </style>
+
+  <div class="testimonials-container">
     <div class="section-header">
-      <p class="section-header__subtitle">Reviews</p>
-      <h2 class="section-header__title">What Our Customers Say</h2>
+      <h2 class="section-title">Customer <span>Reviews</span></h2>
+      <p class="section-subtitle">What our customers say about our anime art prints</p>
     </div>
+
     <div class="testimonials-grid">
       <div class="testimonial-card">
-        <div class="testimonial-card__rating">
-          <span class="testimonial-card__star">★</span>
-          <span class="testimonial-card__star">★</span>
-          <span class="testimonial-card__star">★</span>
-          <span class="testimonial-card__star">★</span>
-          <span class="testimonial-card__star">★</span>
+        <span class="testimonial-quote">"</span>
+        <div class="testimonial-rating">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
         </div>
-        <p class="testimonial-card__text">"The art print quality is amazing! Colors are vibrant and the canvas feels premium. My Attack on Titan poster looks stunning in my room."</p>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">JK</div>
-          <div>
-            <div class="testimonial-card__name">John Kim</div>
-            <div class="testimonial-card__location">Los Angeles, CA</div>
+        <p class="testimonial-content">
+          The Naruto art print I ordered is absolutely stunning! The colors are vibrant and the quality is top-notch. It looks amazing on my wall.
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">S</div>
+          <div class="author-info">
+            <span class="author-name">Sarah Miller</span>
+            <span class="author-title">Naruto Fan</span>
           </div>
         </div>
       </div>
+
       <div class="testimonial-card">
-        <div class="testimonial-card__rating">
-          <span class="testimonial-card__star">★</span>
-          <span class="testimonial-card__star">★</span>
-          <span class="testimonial-card__star">★</span>
-          <span class="testimonial-card__star">★</span>
-          <span class="testimonial-card__star">★</span>
+        <span class="testimonial-quote">"</span>
+        <div class="testimonial-rating">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
         </div>
-        <p class="testimonial-card__text">"Fast shipping and perfect packaging. My One Piece collection looks incredible. Will definitely order more!"</p>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">SA</div>
-          <div>
-            <div class="testimonial-card__name">Sarah Adams</div>
-            <div class="testimonial-card__location">New York, NY</div>
+        <p class="testimonial-content">
+          I've bought several prints from MangaKing and each one has exceeded my expectations. Fast shipping and excellent customer service!
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">M</div>
+          <div class="author-info">
+            <span class="author-name">Mike Johnson</span>
+            <span class="author-title">Anime Collector</span>
           </div>
         </div>
       </div>
+
       <div class="testimonial-card">
-        <div class="testimonial-card__rating">
-          <span class="testimonial-card__star">★</span>
-          <span class="testimonial-card__star">★</span>
-          <span class="testimonial-card__star">★</span>
-          <span class="testimonial-card__star">★</span>
-          <span class="testimonial-card__star">★</span>
+        <span class="testimonial-quote">"</span>
+        <div class="testimonial-rating">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
         </div>
-        <p class="testimonial-card__text">"Best anime art store I've found! The selection is amazing and the customer service is top notch. Five stars!"</p>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">MB</div>
-          <div>
-            <div class="testimonial-card__name">Mike Brown</div>
-            <div class="testimonial-card__location">Chicago, IL</div>
+        <p class="testimonial-content">
+          The Goku Super Saiyan print is the centerpiece of my room. The attention to detail is incredible. Highly recommend!
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">K</div>
+          <div class="author-info">
+            <span class="author-name">Kim Lee</span>
+            <span class="author-title">Dragon Ball Fan</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-{% schema %}
-{
-  "name": "Testimonials",
-  "settings": []
-}
-{% endschema %}

@@ -1,17 +1,176 @@
 <section class="newsletter-section">
-  <div class="newsletter-card">
-    <div class="newsletter-card__icon">📧</div>
-    <h2 class="newsletter-card__title">Join Our Anime Community</h2>
-    <p class="newsletter-card__description">Get exclusive discounts, new release alerts, and anime news delivered to your inbox.</p>
-    <form class="newsletter-form" action="/contact" method="post">
-      <input type="email" class="newsletter-form__input" placeholder="Enter your email" required>
-      <button type="submit" class="newsletter-form__button">Subscribe</button>
+  <style>
+    .newsletter-section {
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 42, 109, 0.1), rgba(5, 217, 232, 0.1));
+    }
+
+    .newsletter-bg::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 20% 50%, rgba(255, 42, 109, 0.2) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 50%, rgba(5, 217, 232, 0.2) 0%, transparent 40%);
+      animation: gradient-shift 15s ease infinite;
+    }
+
+    .newsletter-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .newsletter-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-radius: var(--radius-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      box-shadow: var(--shadow-glow);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .newsletter-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 16px;
+    }
+
+    .newsletter-title span {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .newsletter-description {
+      font-size: 1.125rem;
+      color: var(--color-text-subdued);
+      margin-bottom: 32px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      min-width: 250px;
+      padding: 16px 20px;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      font-size: 15px;
+      color: var(--color-text);
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-input:focus {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .newsletter-input::placeholder {
+      color: var(--color-text-subdued);
+    }
+
+    .newsletter-button {
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border: none;
+      border-radius: var(--radius-lg);
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .newsletter-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .newsletter-terms {
+      font-size: 13px;
+      color: var(--color-text-subdued);
+      margin-top: 16px;
+    }
+
+    .newsletter-terms a {
+      color: var(--color-primary);
+    }
+
+    .newsletter-terms a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .newsletter-section {
+        padding: 60px 0;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .newsletter-input {
+        min-width: 100%;
+      }
+
+      .newsletter-button {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <div class="newsletter-bg"></div>
+  <div class="newsletter-container">
+    <div class="newsletter-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+    </div>
+
+    <h2 class="newsletter-title">Subscribe to Our <span>Newsletter</span></h2>
+    <p class="newsletter-description">
+      Get exclusive updates on new releases, special offers, and anime news delivered to your inbox.
+    </p>
+
+    <form class="newsletter-form" action="#" method="post">
+      <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+      <button type="submit" class="newsletter-button">Subscribe</button>
     </form>
+
+    <p class="newsletter-terms">
+      By subscribing, you agree to our <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>.
+    </p>
   </div>
 </section>
-{% schema %}
-{
-  "name": "Newsletter",
-  "settings": []
-}
-{% endschema %}

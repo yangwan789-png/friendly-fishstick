@@ -1,211 +1,249 @@
 <section class="series-section">
-  <div class="container">
+  <style>
+    .series-section {
+      padding: 80px 0;
+      background: var(--color-bg-secondary);
+      position: relative;
+    }
+
+    .series-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+    }
+
+    .series-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 16px;
+    }
+
+    .section-title span {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--color-text-subdued);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .series-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .series-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      border: 1px solid var(--color-border);
+    }
+
+    .series-card:hover {
+      transform: translateY(-12px);
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .series-card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .series-card:hover .series-card-image {
+      transform: scale(1.1);
+    }
+
+    .series-card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3), transparent);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .series-card:hover .series-card-overlay {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(255, 42, 109, 0.2), transparent);
+    }
+
+    .series-card-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(255, 42, 109, 0.9);
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .series-card-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .series-card-count {
+      font-size: 14px;
+      color: var(--color-text-subdued);
+      margin-bottom: 16px;
+    }
+
+    .series-card-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(255, 42, 109, 0.9);
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+
+    .series-card:hover .series-card-button {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .series-card-button:hover {
+      background: var(--color-primary);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .series-card-button svg {
+      transition: transform 0.3s ease;
+    }
+
+    .series-card-button:hover svg {
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 768px) {
+      .series-section {
+        padding: 60px 0;
+      }
+
+      .series-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+
+      .series-card {
+        aspect-ratio: 3/4;
+      }
+
+      .series-card-title {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+
+  <div class="series-container">
     <div class="section-header">
-      <p class="section-header__subtitle">Explore Series</p>
-      <h2 class="section-header__title">Popular Anime Series</h2>
-      <p class="section-header__description">Browse our collection by your favorite anime series</p>
+      <h2 class="section-title">Explore Popular <span>Series</span></h2>
+      <p class="section-subtitle">Discover art prints from your favorite anime series</p>
     </div>
-    
-    <div class="series-grid" id="seriesGrid">
-      <!-- Naruto -->
-      <button class="series-card" data-series="naruto">
-        <div class="series-card__image-wrapper">
-          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=naruto%20anime%20poster%20dark%20dramatic%20lighting%20orange%20blue&image_size=portrait_4_3" alt="Naruto" class="series-card__image">
-          <div class="series-card__gradient"></div>
-        </div>
-        <div class="series-card__content">
-          <h3 class="series-card__title">Naruto</h3>
-          <div class="series-card__info">
-            <span class="series-card__count">5 Characters</span>
-          </div>
-          <div class="series-card__arrow">→</div>
-        </div>
-      </button>
 
-      <!-- One Piece -->
-      <button class="series-card" data-series="one-piece">
-        <div class="series-card__image-wrapper">
-          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=one%20piece%20anime%20poster%20ocean%20adventure%20straw%20hat%20pirates&image_size=portrait_4_3" alt="One Piece" class="series-card__image">
-          <div class="series-card__gradient"></div>
+    <div class="series-grid">
+      <a href="/collections/naruto" class="series-card">
+        <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=naruto%20anime%20series%20hero%20shot%20dramatic%20dark%20background%20orange%20theme&image_size=portrait_4_3" alt="Naruto" class="series-card-image">
+        <div class="series-card-overlay">
+          <span class="series-card-badge">50+ Prints</span>
+          <h3 class="series-card-title">Naruto</h3>
+          <p class="series-card-count">Characters: Naruto, Sasuke, Sakura, Kakashi, Itachi</p>
+          <span class="series-card-button">
+            View Collection
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </span>
         </div>
-        <div class="series-card__content">
-          <h3 class="series-card__title">One Piece</h3>
-          <div class="series-card__info">
-            <span class="series-card__count">5 Characters</span>
-          </div>
-          <div class="series-card__arrow">→</div>
-        </div>
-      </button>
+      </a>
 
-      <!-- Dragon Ball -->
-      <button class="series-card" data-series="dragon-ball">
-        <div class="series-card__image-wrapper">
-          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dragon%20ball%20anime%20poster%20energy%20aura%20super%20saiyan&image_size=portrait_4_3" alt="Dragon Ball" class="series-card__image">
-          <div class="series-card__gradient"></div>
+      <a href="/collections/one-piece" class="series-card">
+        <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=one%20piece%20anime%20series%20luffy%20dramatic%20dark%20background%20red%20theme&image_size=portrait_4_3" alt="One Piece" class="series-card-image">
+        <div class="series-card-overlay">
+          <span class="series-card-badge">60+ Prints</span>
+          <h3 class="series-card-title">One Piece</h3>
+          <p class="series-card-count">Characters: Luffy, Zoro, Nami, Sanji, Chopper</p>
+          <span class="series-card-button">
+            View Collection
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </span>
         </div>
-        <div class="series-card__content">
-          <h3 class="series-card__title">Dragon Ball</h3>
-          <div class="series-card__info">
-            <span class="series-card__count">5 Characters</span>
-          </div>
-          <div class="series-card__arrow">→</div>
-        </div>
-      </button>
+      </a>
 
-      <!-- Marvel -->
-      <button class="series-card" data-series="marvel">
-        <div class="series-card__image-wrapper">
-          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=marvel%20superheroes%20poster%20comic%20style%20avengers&image_size=portrait_4_3" alt="Marvel" class="series-card__image">
-          <div class="series-card__gradient"></div>
+      <a href="/collections/dragon-ball" class="series-card">
+        <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=dragon%20ball%20goku%20super%20saiyan%20dramatic%20dark%20background%20yellow%20aura&image_size=portrait_4_3" alt="Dragon Ball" class="series-card-image">
+        <div class="series-card-overlay">
+          <span class="series-card-badge">45+ Prints</span>
+          <h3 class="series-card-title">Dragon Ball</h3>
+          <p class="series-card-count">Characters: Goku, Vegeta, Piccolo, Gohan, Frieza</p>
+          <span class="series-card-button">
+            View Collection
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </span>
         </div>
-        <div class="series-card__content">
-          <h3 class="series-card__title">Marvel</h3>
-          <div class="series-card__info">
-            <span class="series-card__count">5 Characters</span>
-          </div>
-          <div class="series-card__arrow">→</div>
+      </a>
+
+      <a href="/collections/marvel" class="series-card">
+        <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=marvel%20superheroes%20team%20dramatic%20dark%20background%20epic%20pose&image_size=portrait_4_3" alt="Marvel" class="series-card-image">
+        <div class="series-card-overlay">
+          <span class="series-card-badge">70+ Prints</span>
+          <h3 class="series-card-title">Marvel</h3>
+          <p class="series-card-count">Characters: Spider-Man, Iron Man, Captain America, Thor, Black Widow</p>
+          <span class="series-card-button">
+            View Collection
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </span>
         </div>
-      </button>
+      </a>
     </div>
   </div>
 </section>
-
-<div id="seriesDetail" class="series-detail" style="display: none;">
-  <div class="series-detail__header">
-    <div class="container">
-      <button id="backButton" class="series-detail__back">← Back to Series</button>
-      <h2 id="seriesTitle" class="series-detail__title"></h2>
-      <p id="seriesDescription" class="series-detail__description"></p>
-    </div>
-  </div>
-  
-  <div class="character-filters">
-    <div class="container">
-      <h3 class="character-filters__title">Characters</h3>
-      <div class="character-filters__list" id="characterFilters">
-      </div>
-    </div>
-  </div>
-  
-  <section class="style-tabs">
-    <div class="container">
-      <h3 class="style-tabs__title">Art Styles</h3>
-      <div class="style-tabs__list">
-        <button class="style-tab__item active" data-style="">All Styles</button>
-        <button class="style-tab__item" data-style="realistic">Realistic</button>
-        <button class="style-tab__item" data-style="anime">Anime</button>
-        <button class="style-tab__item" data-style="chibi">Chibi</button>
-        <button class="style-tab__item" data-style="cyberpunk">Cyberpunk</button>
-        <button class="style-tab__item" data-style="watercolor">Watercolor</button>
-      </div>
-    </div>
-  </section>
-  
-  <section class="collection-products">
-    <div class="product-grid" id="productGrid">
-    </div>
-  </section>
-</div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const seriesCards = document.querySelectorAll('.series-card');
-    const seriesDetail = document.getElementById('seriesDetail');
-    const seriesGrid = document.getElementById('seriesGrid');
-    const backButton = document.getElementById('backButton');
-    const seriesTitle = document.getElementById('seriesTitle');
-    const seriesDescription = document.getElementById('seriesDescription');
-    const characterFilters = document.getElementById('characterFilters');
-    const productGrid = document.getElementById('productGrid');
-
-    const seriesData = {
-      'naruto': {
-        title: 'Naruto',
-        description: 'Discover stunning art prints featuring your favorite Naruto characters. From the Hidden Leaf Village to epic battles, find the perfect piece for your collection.',
-        characters: ['Naruto Uzumaki', 'Sasuke Uchiha', 'Sakura Haruno', 'Kakashi Hatake', 'Itachi Uchiha']
-      },
-      'one-piece': {
-        title: 'One Piece',
-        description: 'Set sail with the Straw Hat Pirates! Explore our One Piece art print collection featuring Luffy and his crew on their adventure.',
-        characters: ['Monkey D. Luffy', 'Roronoa Zoro', 'Nami', 'Sanji', 'Tony Tony Chopper']
-      },
-      'dragon-ball': {
-        title: 'Dragon Ball',
-        description: 'Power up your space with Dragon Ball art prints! From Goku\'s epic transformations to legendary battles.',
-        characters: ['Goku', 'Vegeta', 'Piccolo', 'Gohan', 'Frieza']
-      },
-      'marvel': {
-        title: 'Marvel',
-        description: 'Assemble your dream collection with Marvel art prints! Featuring iconic superheroes from the Avengers.',
-        characters: ['Spider-Man', 'Iron Man', 'Captain America', 'Thor', 'Black Widow']
-      }
-    };
-
-    seriesCards.forEach(card => {
-      card.addEventListener('click', function() {
-        const series = this.dataset.series;
-        const data = seriesData[series];
-        
-        seriesTitle.textContent = data.title;
-        seriesDescription.textContent = data.description;
-        
-        characterFilters.innerHTML = '';
-        const allBtn = document.createElement('button');
-        allBtn.className = 'character-filter__item active';
-        allBtn.textContent = 'All Characters';
-        characterFilters.appendChild(allBtn);
-        
-        data.characters.forEach(char => {
-          const btn = document.createElement('button');
-          btn.className = 'character-filter__item';
-          btn.textContent = char;
-          characterFilters.appendChild(btn);
-        });
-        
-        productGrid.innerHTML = '';
-        for (let i = 1; i <= 6; i++) {
-          const productCard = document.createElement('div');
-          productCard.className = 'product-card';
-          productCard.innerHTML = `
-            <div class="product-card__image-wrapper">
-              <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(data.title + ' anime character art print poster high quality')}&image_size=portrait_4_3" alt="${data.title} product ${i}" class="product-card__image">
-              <span class="product-card__badge new">New</span>
-            </div>
-            <div class="product-card__content">
-              <span class="product-card__category">${data.title}</span>
-              <h3 class="product-card__title">${data.title} Character Art #${i}</h3>
-              <div class="product-card__price">$29.99</div>
-            </div>
-          `;
-          productGrid.appendChild(productCard);
-        }
-        
-        seriesGrid.style.display = 'none';
-        seriesDetail.style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    });
-
-    backButton.addEventListener('click', function() {
-      seriesDetail.style.display = 'none';
-      seriesGrid.style.display = 'grid';
-    });
-
-    document.addEventListener('click', function(e) {
-      if (e.target.classList.contains('character-filter__item')) {
-        document.querySelectorAll('.character-filter__item').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-      }
-      if (e.target.classList.contains('style-tab__item')) {
-        document.querySelectorAll('.style-tab__item').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-      }
-    });
-  });
-</script>
-{% schema %}
-{
-  "name": "Series Grid",
-  "settings": []
-}
-{% endschema %}
