@@ -1,0 +1,30 @@
+<section class="collection-filters">
+  <div class="container">
+    <div class="collection-filters__sort">
+      <label for="SortBy">Sort by:</label>
+      <select id="SortBy" name="sort_by">
+        <option value="created-desc" {% if collection.sort_by == 'created-desc' %}selected{% endif %}>Newest</option>
+        <option value="created-asc" {% if collection.sort_by == 'created-asc' %}selected{% endif %}>Oldest</option>
+        <option value="price-asc" {% if collection.sort_by == 'price-asc' %}selected{% endif %}>Price: Low to High</option>
+        <option value="price-desc" {% if collection.sort_by == 'price-desc' %}selected{% endif %}>Price: High to Low</option>
+        <option value="title-asc" {% if collection.sort_by == 'title-asc' %}selected{% endif %}>Name: A-Z</option>
+        <option value="title-desc" {% if collection.sort_by == 'title-desc' %}selected{% endif %}>Name: Z-A</option>
+      </select>
+    </div>
+    <div class="collection-filters__tags">
+      {% for tag in collection.all_tags %}
+        {% if current_tags contains tag %}
+          <a href="{{ collection.url }}" class="collection-filters__tag collection-filters__tag--active">{{ tag }}</a>
+        {% else %}
+          <a href="{{ collection.url }}/{{ tag | handle }}" class="collection-filters__tag">{{ tag }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Collection Filters",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,41 @@
+<section class="collection-products">
+  <div class="container">
+    <div class="product-grid">
+      {% for product in collection.products %}
+        <a href="{{ product.url }}" class="product-card">
+          <div class="product-card__image-wrapper">
+            <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.title }}" class="product-card__image">
+            {% if product.tags contains 'New' %}
+              <span class="product-card__badge new">New</span>
+            {% endif %}
+            {% if product.compare_at_price > product.price %}
+              <span class="product-card__badge sale">Sale</span>
+            {% endif %}
+          </div>
+          <div class="product-card__content">
+            <span class="product-card__category">{{ product.collections.first.title }}</span>
+            <h3 class="product-card__title">{{ product.title }}</h3>
+            <div class="product-card__price">
+              {{ product.price | money }}
+              {% if product.compare_at_price > product.price %}
+                <span class="product-card__original-price">{{ product.compare_at_price | money }}</span>
+              {% endif %}
+            </div>
+          </div>
+          <button class="product-card__quick-add" aria-label="Add to cart">+</button>
+        </a>
+      {% endfor %}
+    </div>
+    {% if collection.products.size == 0 %}
+      <div class="collection-products__empty">
+        <p>No products found in this collection.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Collection Products",
+  "settings": []
+}
+{% endschema %}

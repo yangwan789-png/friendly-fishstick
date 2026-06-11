@@ -15,6 +15,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --color-background: {{ settings.color_schemes.background }};
+        --color-text: {{ settings.color_schemes.text }};
+        --color-accent-1: {{ settings.color_schemes.accent_1 }};
+        --color-accent-2: {{ settings.color_schemes.accent_2 }};
+        --color-border: {{ settings.color_schemes.border }};
+        --color-background-secondary: {{ settings.color_schemes.background_secondary }};
+        --color-text-subdued: {{ settings.color_schemes.text_subdued }};
+        --color-button: {{ settings.color_schemes.button }};
+      }
+    </style>
     {{ 'theme.css' | asset_url | stylesheet_tag }}
     {{ content_for_header }}
   </head>

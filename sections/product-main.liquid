@@ -1,0 +1,85 @@
+<section class="product">
+  <div class="product__wrapper">
+    <div class="product__images">
+      <div class="product__main-image">
+        <img src="{{ product.featured_image.src | img_url: 'master' }}" alt="{{ product.title }}" id="ProductMainImage">
+      </div>
+      <div class="product__thumbnails">
+        {% for image in product.images %}
+          <div class="product__thumbnail {% if forloop.first %}active{% endif %}" data-image-src="{{ image.src | img_url: 'master' }}">
+            <img src="{{ image.src | img_url: 'small' }}" alt="{{ product.title }}">
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="product__info">
+      <span class="product__category">{{ product.collections.first.title }}</span>
+      <h1 class="product__title">{{ product.title }}</h1>
+      <div class="product__price">
+        {{ product.price | money }}
+        {% if product.compare_at_price > product.price %}
+          <span class="product__original-price">{{ product.compare_at_price | money }}</span>
+        {% endif %}
+      </div>
+      {% if product.description %}
+        <div class="product__description">{{ product.description }}</div>
+      {% endif %}
+      {% if product.variants.size > 1 %}
+        <div class="product__variants">
+          {% for variant in product.variants %}
+            <button class="product__variant-btn {% if variant == product.selected_or_first_available_variant %}active{% endif %}" data-variant-id="{{ variant.id }}">
+              {{ variant.title }}
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="product__quantity">
+        <button class="product__quantity-btn" id="QuantityDecrease">-</button>
+        <span class="product__quantity-value" id="QuantityValue">1</span>
+        <button class="product__quantity-btn" id="QuantityIncrease">+</button>
+      </div>
+      <button class="product__add-to-cart" id="AddToCart">Add to Cart</button>
+      {% if product.tags.size > 0 %}
+        <div class="product__tags">
+          {% for tag in product.tags limit: 5 %}
+            <span class="product__tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const thumbnails = document.querySelectorAll('.product__thumbnail');
+    const mainImage = document.getElementById('ProductMainImage');
+    
+    thumbnails.forEach(thumbnail => {
+      thumbnail.addEventListener('click', function() {
+        thumbnails.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        mainImage.src = this.dataset.imageSrc;
+      });
+    });
+    
+    const quantityValue = document.getElementById('QuantityValue');
+    const decreaseBtn = document.getElementById('QuantityDecrease');
+    const increaseBtn = document.getElementById('QuantityIncrease');
+    
+    decreaseBtn.addEventListener('click', function() {
+      let val = parseInt(quantityValue.textContent);
+      if (val > 1) quantityValue.textContent = val - 1;
+    });
+    
+    increaseBtn.addEventListener('click', function() {
+      let val = parseInt(quantityValue.textContent);
+      quantityValue.textContent = val + 1;
+    });
+  });
+</script>
+{% schema %}
+{
+  "name": "Product Main",
+  "settings": []
+}
+{% endschema %}

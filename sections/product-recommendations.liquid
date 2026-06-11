@@ -1,0 +1,31 @@
+<section class="featured-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-header__title">You May Also Like</h2>
+    </div>
+    <div class="product-grid">
+      {% for product in collections.all.products limit: 4 %}
+        <a href="{{ product.url }}" class="product-card">
+          <div class="product-card__image-wrapper">
+            <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.title }}" class="product-card__image">
+            {% if product.tags contains 'New' %}
+              <span class="product-card__badge new">New</span>
+            {% endif %}
+          </div>
+          <div class="product-card__content">
+            <span class="product-card__category">{{ product.collections.first.title }}</span>
+            <h3 class="product-card__title">{{ product.title }}</h3>
+            <div class="product-card__price">{{ product.price | money }}</div>
+          </div>
+          <button class="product-card__quick-add" aria-label="Add to cart">+</button>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Product Recommendations",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,19 @@
+<section class="collection-banner">
+  <div class="container">
+    {% if collection.title %}
+      <h1>{{ collection.title }}</h1>
+    {% endif %}
+    {% if collection.description %}
+      <p>{{ collection.description }}</p>
+    {% endif %}
+    {% if collection.products_count > 0 %}
+      <p class="collection-banner__count">{{ collection.products_count }} art prints available</p>
+    {% endif %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Collection Banner",
+  "settings": []
+}
+{% endschema %}
