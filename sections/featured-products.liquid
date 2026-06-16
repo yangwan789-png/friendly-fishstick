@@ -163,7 +163,7 @@
       box-shadow: var(--shadow-lg), var(--shadow-glow);
     }
 
-    .product-display-image-wrapper {
+    .product-display-media-wrapper {
       position: relative;
       overflow: hidden;
     }
@@ -175,8 +175,47 @@
       transition: transform 0.5s ease;
     }
 
-    .product-display-card:hover .product-display-image {
+    .product-display-video {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .product-display-card:hover .product-display-image,
+    .product-display-card:hover .product-display-video {
       transform: scale(1.05);
+    }
+
+    .product-display-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .product-display-play-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .product-display-play-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+      margin-left: 4px;
     }
 
     .product-display-badge {
@@ -193,6 +232,7 @@
       color: var(--color-primary);
       text-transform: uppercase;
       letter-spacing: 1px;
+      z-index: 10;
     }
 
     .product-display-info {
@@ -285,8 +325,28 @@
           {% for block in product_blocks %}
             {% if block.settings.image %}
               <div class="product-display-card">
-                <div class="product-display-image-wrapper">
-                  <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title | escape }}" class="product-display-image">
+                <div class="product-display-media-wrapper">
+                  {% if block.settings.video_url %}
+                    <video 
+                      src="{{ block.settings.video_url }}" 
+                      class="product-display-video"
+                      poster="{{ block.settings.image | img_url: 'master' }}"
+                      loop 
+                      muted 
+                      playsinline
+                      controlslist="nodownload"
+                      preload="metadata"
+                    >
+                      <source src="{{ block.settings.video_url }}" type="video/mp4">
+                    </video>
+                    <div class="product-display-play-btn" onclick="this.parentElement.querySelector('video').play(); this.style.display='none';">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                  {% else %}
+                    <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title | escape }}" class="product-display-image">
+                  {% endif %}
                   <span class="product-display-badge">{{ block.settings.badge }}</span>
                 </div>
                 <div class="product-display-info">
@@ -391,6 +451,12 @@
               "label": "Product Image"
             },
             {
+              "type": "url",
+              "id": "video_url",
+              "label": "Video URL",
+              "info": "Optional: Upload video to Shopify Files and paste the URL here (supports MP4, WebM, GIF)"
+            },
+            {
               "type": "text",
               "id": "title",
               "label": "Display Title",
@@ -406,7 +472,7 @@
               "type": "text",
               "id": "badge",
               "label": "Badge Text",
-              "default": "Customer Photo"
+              "default": "Customer Video"
             }
           ]
         }
