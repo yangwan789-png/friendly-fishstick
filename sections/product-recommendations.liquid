@@ -58,15 +58,17 @@
 
     .product-recommendations__image-wrapper {
       position: relative;
-      aspect-ratio: 3/4;
+      width: 100%;
       overflow: hidden;
+      background: var(--color-bg-card);
     }
 
     .product-recommendations__image {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      object-fit: contain;
       transition: transform 0.5s ease;
+      display: block;
     }
 
     .product-recommendations__card:hover .product-recommendations__image {
