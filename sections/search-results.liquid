@@ -1,0 +1,239 @@
+<section class="search-results-section">
+  <style>
+    .search-results-section {
+      padding: 120px 24px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .search-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .search-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .search-query {
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .search-count {
+      font-size: 1.125rem;
+      color: var(--color-text-subdued);
+    }
+
+    .search-filters {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .search-filter-btn {
+      padding: 10px 24px;
+      border-radius: var(--radius-full);
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .search-filter-btn:hover,
+    .search-filter-btn.active {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .search-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .search-card {
+      background: var(--color-bg-card);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .search-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      border-color: var(--color-primary);
+    }
+
+    .search-card-image-wrapper {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg);
+      flex-shrink: 0;
+    }
+
+    .search-card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .search-card:hover .search-card-image {
+      transform: scale(1.05);
+    }
+
+    .search-card-info {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      margin-top: auto;
+      flex-shrink: 0;
+    }
+
+    .search-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text);
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .search-card-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .no-results-icon {
+      font-size: 4rem;
+      margin-bottom: 24px;
+      opacity: 0.5;
+    }
+
+    .no-results-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .no-results-text {
+      font-size: 1rem;
+      color: var(--color-text-subdued);
+      margin-bottom: 24px;
+    }
+
+    .no-results-btn {
+      padding: 14px 32px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .no-results-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    @media (max-width: 992px) {
+      .search-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .search-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .search-title {
+        font-size: 1.75rem;
+      }
+
+      .search-card-image-wrapper {
+        height: 180px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .search-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="search-header">
+    <h1 class="search-title">
+      Search Results for "<span class="search-query">{{ search.terms }}</span>"
+    </h1>
+    <p class="search-count">{{ search.results_count }} results found</p>
+  </div>
+
+  <div class="search-filters">
+    <button class="search-filter-btn active" data-filter="all">All</button>
+    <button class="search-filter-btn" data-filter="products">Products</button>
+    <button class="search-filter-btn" data-filter="collections">Collections</button>
+  </div>
+
+  {% if search.results_count > 0 %}
+    <div class="search-grid">
+      {% for product in search.results %}
+        <a href="{{ product.url }}" class="search-card">
+          <div class="search-card-image-wrapper">
+            <img src="{{ product.featured_image.src | img_url: '500x667' }}" alt="{{ product.title }}" class="search-card-image">
+          </div>
+          <div class="search-card-info">
+            <span class="search-card-title">{{ product.title }}</span>
+            <span class="search-card-price">{{ product.price | money }}</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="no-results">
+      <div class="no-results-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+          <line x1="8" y1="8" x2="8.01" y2="8"></line>
+          <line x1="16" y1="16" x2="16.01" y2="16"></line>
+        </svg>
+      </div>
+      <h2 class="no-results-title">No results found</h2>
+      <p class="no-results-text">We couldn't find any products matching "{{ search.terms }}". Try searching for something else.</p>
+      <a href="/collections/all" class="no-results-btn">Browse All Products</a>
+    </div>
+  {% endif %}
+</section>
