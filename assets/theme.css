@@ -1591,108 +1591,11 @@ body {
   transform: translateX(0);
 }
 
-.character-filters {
-  padding: 2rem 1rem;
-  background: var(--color-background-secondary);
-  border-bottom: 1px solid var(--color-border);
-}
-
-@media (min-width: 768px) {
-  .character-filters {
-    padding: 2rem 2rem;
-  }
-}
-
-.character-filters__title {
-  font-family: var(--font-family-heading);
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--color-text-muted);
-}
-
-.character-filters__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.character-filter__item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1rem;
-  background: var(--color-background-card);
-  border: 1px solid var(--color-border);
-  border-radius: 50px;
-  color: var(--color-text);
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.character-filter__item:hover {
-  border-color: var(--color-accent-pink);
-}
-
-.character-filter__item.active {
-  background: var(--color-accent-pink);
-  border-color: var(--color-accent-pink);
-  color: white;
-}
-
 .character-filter__count {
   background: rgba(255, 255, 255, 0.1);
   padding: 0.15rem 0.4rem;
   border-radius: 10px;
   font-size: 0.75rem;
-}
-
-.style-tabs {
-  padding: 1.5rem 1rem;
-  border-bottom: 1px solid var(--color-border);
-}
-
-@media (min-width: 768px) {
-  .style-tabs {
-    padding: 1.5rem 2rem;
-  }
-}
-
-.style-tabs__title {
-  font-family: var(--font-family-heading);
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--color-text-muted);
-}
-
-.style-tabs__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.style-tab__item {
-  padding: 0.5rem 1rem;
-  background: transparent;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  color: var(--color-text-muted);
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.style-tab__item:hover {
-  border-color: var(--color-accent-cyan);
-  color: var(--color-accent-cyan);
-}
-
-.style-tab__item.active {
-  background: var(--color-accent-cyan);
-  border-color: var(--color-accent-cyan);
-  color: #000;
 }
 
 .series-detail {

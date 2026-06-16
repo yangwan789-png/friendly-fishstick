@@ -26,53 +26,15 @@
     </div>
   </div>
 
-  <section class="character-filters">
+  <section class="series-filter">
     <div class="container">
-      <h3 class="character-filters__title">Characters</h3>
-      <div class="character-filters__list">
-        {% if page.title == 'Naruto' %}
-          <button class="character-filter__item active" data-character="">All Characters</button>
-          <button class="character-filter__item" data-character="naruto-uzumaki">Naruto Uzumaki</button>
-          <button class="character-filter__item" data-character="sasuke-uchiha">Sasuke Uchiha</button>
-          <button class="character-filter__item" data-character="sakura-haruno">Sakura Haruno</button>
-          <button class="character-filter__item" data-character="kakashi-hatake">Kakashi Hatake</button>
-          <button class="character-filter__item" data-character="itachi-uchiha">Itachi Uchiha</button>
-        {% elsif page.title == 'One Piece' %}
-          <button class="character-filter__item active" data-character="">All Characters</button>
-          <button class="character-filter__item" data-character="luffy">Monkey D. Luffy</button>
-          <button class="character-filter__item" data-character="zoro">Roronoa Zoro</button>
-          <button class="character-filter__item" data-character="nami">Nami</button>
-          <button class="character-filter__item" data-character="sanji">Sanji</button>
-          <button class="character-filter__item" data-character="chopper">Tony Tony Chopper</button>
-        {% elsif page.title == 'Dragon Ball' %}
-          <button class="character-filter__item active" data-character="">All Characters</button>
-          <button class="character-filter__item" data-character="goku">Goku</button>
-          <button class="character-filter__item" data-character="vegeta">Vegeta</button>
-          <button class="character-filter__item" data-character="piccolo">Piccolo</button>
-          <button class="character-filter__item" data-character="gohan">Gohan</button>
-          <button class="character-filter__item" data-character="frieza">Frieza</button>
-        {% elsif page.title == 'Marvel' %}
-          <button class="character-filter__item active" data-character="">All Characters</button>
-          <button class="character-filter__item" data-character="spider-man">Spider-Man</button>
-          <button class="character-filter__item" data-character="iron-man">Iron Man</button>
-          <button class="character-filter__item" data-character="captain-america">Captain America</button>
-          <button class="character-filter__item" data-character="thor">Thor</button>
-          <button class="character-filter__item" data-character="black-widow">Black Widow</button>
-        {% endif %}
-      </div>
-    </div>
-  </section>
-
-  <section class="style-tabs">
-    <div class="container">
-      <h3 class="style-tabs__title">Art Styles</h3>
-      <div class="style-tabs__list">
-        <button class="style-tab__item active" data-style="">All Styles</button>
-        <button class="style-tab__item" data-style="realistic">Realistic</button>
-        <button class="style-tab__item" data-style="anime">Anime</button>
-        <button class="style-tab__item" data-style="chibi">Chibi</button>
-        <button class="style-tab__item" data-style="cyberpunk">Cyberpunk</button>
-        <button class="style-tab__item" data-style="watercolor">Watercolor</button>
+      <h3 class="series-filter__title">Product Series</h3>
+      <div class="series-filter__list">
+        <a href="/collections/all" class="series-filter__item">All Series</a>
+        <a href="/pages/naruto" class="series-filter__item {% if page.title == 'Naruto' %}active{% endif %}">Naruto</a>
+        <a href="/pages/one-piece" class="series-filter__item {% if page.title == 'One Piece' %}active{% endif %}">One Piece</a>
+        <a href="/pages/dragon-ball" class="series-filter__item {% if page.title == 'Dragon Ball' %}active{% endif %}">Dragon Ball</a>
+        <a href="/pages/marvel" class="series-filter__item {% if page.title == 'Marvel' %}active{% endif %}">Marvel</a>
       </div>
     </div>
   </section>
