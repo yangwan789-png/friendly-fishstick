@@ -349,6 +349,38 @@
         let val = parseInt(quantityValue.textContent);
         quantityValue.textContent = val + 1;
       });
+
+      const addToCartBtn = document.getElementById('AddToCart');
+      const variantBtns = document.querySelectorAll('.product__variant-btn');
+      let selectedVariantId = {{ product.selected_or_first_available_variant.id }};
+
+      variantBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          variantBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          selectedVariantId = parseInt(this.dataset.variantId);
+        });
+      });
+
+      addToCartBtn.addEventListener('click', function() {
+        const quantity = parseInt(quantityValue.textContent);
+        
+        const formData = new FormData();
+        formData.append('id', selectedVariantId);
+        formData.append('quantity', quantity);
+        
+        fetch('/cart/add.js', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          window.location.href = '/cart';
+        })
+        .catch(error => {
+          console.error('Error adding to cart:', error);
+        });
+      });
     });
   </script>
 </section>
