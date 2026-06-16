@@ -233,44 +233,6 @@
       color: var(--color-primary);
     }
 
-    .cart-discount {
-      margin-top: 16px;
-    }
-
-    .cart-discount-input {
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: var(--radius-lg);
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      font-size: 1rem;
-      color: var(--color-text);
-      outline: none;
-      margin-bottom: 12px;
-    }
-
-    .cart-discount-input:focus {
-      border-color: var(--color-primary);
-    }
-
-    .cart-discount-btn {
-      width: 100%;
-      padding: 14px;
-      border-radius: var(--radius-lg);
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--color-text);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .cart-discount-btn:hover {
-      border-color: var(--color-primary);
-      color: var(--color-primary);
-    }
-
     .cart-checkout-btn {
       width: 100%;
       padding: 18px;
@@ -423,11 +385,6 @@
         <span class="cart-summary-total-value">{{ cart.total_price | money }}</span>
       </div>
 
-      <div class="cart-discount">
-        <input type="text" class="cart-discount-input" placeholder="Enter discount code" id="discountCode">
-        <button class="cart-discount-btn" onclick="applyDiscount()">Apply Discount</button>
-      </div>
-
       <button class="cart-checkout-btn" onclick="checkout()">Proceed to Checkout</button>
 
       <div class="cart-policy">
@@ -484,26 +441,6 @@
       })
       .catch(error => {
         console.error('Error updating quantity:', error);
-      });
-    }
-
-    function applyDiscount() {
-      const discountCode = document.getElementById('discountCode').value.trim();
-      if (!discountCode) return;
-      
-      const formData = new FormData();
-      formData.append('discount', discountCode);
-      
-      fetch('/cart/apply_discount.js', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(() => {
-        window.location.reload();
-      })
-      .catch(error => {
-        console.error('Error applying discount:', error);
       });
     }
 
