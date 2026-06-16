@@ -262,18 +262,16 @@
       {% endif %}
     </div>
 
-    {% if section.blocks.size > 0 %}
+    {% if section.settings.products != blank %}
       <div class="hero-visual">
         <div class="hero-grid">
-          {% for block in section.blocks %}
-            <div class="hero-card">
-              {% if block.settings.image != blank %}
-                <img src="{{ block.settings.image.src | img_url: '500x667' }}" alt="{{ block.settings.title }}" class="hero-card-image">
-              {% endif %}
+          {% for product in section.settings.products %}
+            <a href="{{ product.url }}" class="hero-card">
+              <img src="{{ product.featured_image.src | img_url: '500x667' }}" alt="{{ product.title }}" class="hero-card-image">
               <div class="hero-card-overlay">
-                <span class="hero-card-title">{{ block.settings.title }}</span>
+                <span class="hero-card-title">{{ product.title }}</span>
               </div>
-            </div>
+            </a>
           {% endfor %}
         </div>
       </div>
@@ -367,80 +365,12 @@
       "id": "secondary_button_link",
       "label": "Secondary Button Link",
       "default": "/pages/about"
-    }
-  ],
-  "blocks": [
+    },
     {
-      "type": "hero_card",
-      "name": "Hero Card",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Card Image"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Card Title"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Hero Section",
-      "settings": {},
-      "blocks": [
-        {
-          "type": "hero_card",
-          "settings": {
-            "title": "Naruto"
-          }
-        },
-        {
-          "type": "hero_card",
-          "settings": {
-            "title": "One Piece"
-          }
-        },
-        {
-          "type": "hero_card",
-          "settings": {
-            "title": "Dragon Ball"
-          }
-        },
-        {
-          "type": "hero_card",
-          "settings": {
-            "title": "Marvel"
-          }
-        },
-        {
-          "type": "hero_card",
-          "settings": {
-            "title": "Sasuke"
-          }
-        },
-        {
-          "type": "hero_card",
-          "settings": {
-            "title": "Vegeta"
-          }
-        },
-        {
-          "type": "hero_card",
-          "settings": {
-            "title": "Iron Man"
-          }
-        },
-        {
-          "type": "hero_card",
-          "settings": {
-            "title": "Zoro"
-          }
-        }
-      ]
+      "type": "product_list",
+      "id": "products",
+      "label": "Products",
+      "info": "Select products to display in hero grid"
     }
   ]
 }
