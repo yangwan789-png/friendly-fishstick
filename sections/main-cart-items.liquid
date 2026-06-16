@@ -336,7 +336,15 @@
         {% for item in cart.items %}
           <div class="cart-item">
             <div class="cart-item-image-wrapper">
-              <img src="{{ item.featured_image.src | img_url: '500x500' }}" alt="{{ item.title }}" class="cart-item-image">
+              {% if item.featured_image %}
+                <img src="{{ item.featured_image | img_url: '500x500' }}" alt="{{ item.title }}" class="cart-item-image">
+              {% elsif item.image %}
+                <img src="{{ item.image | img_url: '500x500' }}" alt="{{ item.title }}" class="cart-item-image">
+              {% elsif item.variant.featured_image %}
+                <img src="{{ item.variant.featured_image | img_url: '500x500' }}" alt="{{ item.title }}" class="cart-item-image">
+              {% else %}
+                <img src="{{ 'product-1.png' | asset_url }}" alt="{{ item.title }}" class="cart-item-image">
+              {% endif %}
             </div>
             <div class="cart-item-details">
               <a href="{{ item.url }}" class="cart-item-title">{{ item.title }}</a>
@@ -397,7 +405,7 @@
               <circle cx="12" cy="7" r="4"></circle>
             </svg>
           </span>
-          <span>Free shipping on orders over $50</span>
+          <span>Free shipping on orders with 2+ items</span>
         </div>
         <div class="cart-policy-item">
           <span class="cart-policy-icon">
