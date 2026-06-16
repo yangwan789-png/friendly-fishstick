@@ -1,23 +1,203 @@
-<section class="featured-section">
+<section class="product-recommendations">
+  <style>
+    .product-recommendations {
+      padding: 60px 0;
+      background: var(--color-bg-secondary);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .product-recommendations .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .product-recommendations__header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .product-recommendations__title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .product-recommendations__title span {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .product-recommendations__subtitle {
+      font-size: 1.125rem;
+      color: var(--color-text-subdued);
+    }
+
+    .product-recommendations__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .product-recommendations__card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .product-recommendations__card:hover {
+      transform: translateY(-8px);
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .product-recommendations__image-wrapper {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+    }
+
+    .product-recommendations__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-recommendations__card:hover .product-recommendations__image {
+      transform: scale(1.05);
+    }
+
+    .product-recommendations__badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 12px;
+      background: var(--color-secondary);
+      color: var(--color-bg);
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .product-recommendations__badge.sale {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .product-recommendations__quick-add {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .product-recommendations__card:hover .product-recommendations__quick-add {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .product-recommendations__quick-add:hover {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .product-recommendations__content {
+      padding: 20px;
+    }
+
+    .product-recommendations__category {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .product-recommendations__name {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .product-recommendations__name:hover {
+      color: var(--color-primary);
+    }
+
+    .product-recommendations__price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    @media (max-width: 768px) {
+      .product-recommendations {
+        padding: 40px 0;
+      }
+
+      .product-recommendations .container {
+        padding: 0 16px;
+      }
+
+      .product-recommendations__grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+
+      .product-recommendations__content {
+        padding: 16px;
+      }
+    }
+  </style>
+
   <div class="container">
-    <div class="section-header">
-      <h2 class="section-header__title">You May Also Like</h2>
+    <div class="product-recommendations__header">
+      <h2 class="product-recommendations__title">You May Also <span>Like</span></h2>
+      <p class="product-recommendations__subtitle">Discover similar art prints for your collection</p>
     </div>
-    <div class="product-grid">
+    <div class="product-recommendations__grid">
       {% for product in collections.all.products limit: 4 %}
-        <a href="{{ product.url }}" class="product-card">
-          <div class="product-card__image-wrapper">
-            <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.title }}" class="product-card__image">
+        <a href="{{ product.url }}" class="product-recommendations__card">
+          <div class="product-recommendations__image-wrapper">
+            <img src="{{ product.featured_image.src | img_url: '500x667' }}" alt="{{ product.title }}" class="product-recommendations__image">
             {% if product.tags contains 'New' %}
-              <span class="product-card__badge new">New</span>
+              <span class="product-recommendations__badge">New</span>
             {% endif %}
+            {% if product.compare_at_price > product.price %}
+              <span class="product-recommendations__badge sale">Sale</span>
+            {% endif %}
+            <button class="product-recommendations__quick-add" aria-label="Add to cart">+</button>
           </div>
-          <div class="product-card__content">
-            <span class="product-card__category">{{ product.collections.first.title }}</span>
-            <h3 class="product-card__title">{{ product.title }}</h3>
-            <div class="product-card__price">{{ product.price | money }}</div>
+          <div class="product-recommendations__content">
+            <span class="product-recommendations__category">{{ product.collections.first.title }}</span>
+            <h3 class="product-recommendations__name">{{ product.title }}</h3>
+            <div class="product-recommendations__price">{{ product.price | money }}</div>
           </div>
-          <button class="product-card__quick-add" aria-label="Add to cart">+</button>
         </a>
       {% endfor %}
     </div>

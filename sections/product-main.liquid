@@ -1,4 +1,277 @@
 <section class="product">
+  <style>
+    .product {
+      padding: 60px 0;
+      background: var(--color-bg);
+    }
+
+    .product__wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .product__images {
+      position: sticky;
+      top: 100px;
+    }
+
+    .product__main-image {
+      aspect-ratio: 3/4;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: var(--color-bg-card);
+      margin-bottom: 16px;
+      border: 1px solid var(--color-border);
+    }
+
+    .product__main-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product__thumbnails {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .product__thumbnail {
+      width: 80px;
+      height: 100px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .product__thumbnail:hover {
+      border-color: var(--color-primary);
+    }
+
+    .product__thumbnail.active {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .product__thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product__info {
+      padding-top: 20px;
+    }
+
+    .product__category {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .product__title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .product__price {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .product__price span:first-child {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .product__original-price {
+      font-size: 1.25rem;
+      color: var(--color-text-subdued);
+      text-decoration: line-through;
+    }
+
+    .product__description {
+      font-size: 1rem;
+      color: var(--color-text-subdued);
+      line-height: 1.8;
+      margin-bottom: 32px;
+      padding: 20px;
+      background: var(--color-bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+    }
+
+    .product__variants {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .product__variant-btn {
+      padding: 12px 24px;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .product__variant-btn:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .product__variant-btn.active {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-color: transparent;
+      color: white;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .product__quantity {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .product__quantity-btn {
+      width: 48px;
+      height: 48px;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product__quantity-btn:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: white;
+    }
+
+    .product__quantity-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .product__add-to-cart {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border: none;
+      border-radius: var(--radius-xl);
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .product__add-to-cart:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .product__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .product__tag {
+      padding: 6px 14px;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-subdued);
+    }
+
+    @media (max-width: 992px) {
+      .product__wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .product__images {
+        position: static;
+      }
+
+      .product__main-image {
+        aspect-ratio: 4/5;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .product {
+        padding: 40px 0;
+      }
+
+      .product__wrapper {
+        padding: 0 16px;
+        gap: 32px;
+      }
+
+      .product__title {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+      }
+
+      .product__price span:first-child {
+        font-size: 1.5rem;
+      }
+
+      .product__quantity-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
+      }
+
+      .product__quantity-value {
+        font-size: 1.25rem;
+        min-width: 40px;
+      }
+    }
+  </style>
+
   <div class="product__wrapper">
     <div class="product__images">
       <div class="product__main-image">
@@ -48,35 +321,36 @@
       {% endif %}
     </div>
   </div>
-</section>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const thumbnails = document.querySelectorAll('.product__thumbnail');
-    const mainImage = document.getElementById('ProductMainImage');
-    
-    thumbnails.forEach(thumbnail => {
-      thumbnail.addEventListener('click', function() {
-        thumbnails.forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
-        mainImage.src = this.dataset.imageSrc;
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const thumbnails = document.querySelectorAll('.product__thumbnail');
+      const mainImage = document.getElementById('ProductMainImage');
+      
+      thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+          thumbnails.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          mainImage.src = this.dataset.imageSrc;
+        });
+      });
+      
+      const quantityValue = document.getElementById('QuantityValue');
+      const decreaseBtn = document.getElementById('QuantityDecrease');
+      const increaseBtn = document.getElementById('QuantityIncrease');
+      
+      decreaseBtn.addEventListener('click', function() {
+        let val = parseInt(quantityValue.textContent);
+        if (val > 1) quantityValue.textContent = val - 1;
+      });
+      
+      increaseBtn.addEventListener('click', function() {
+        let val = parseInt(quantityValue.textContent);
+        quantityValue.textContent = val + 1;
       });
     });
-    
-    const quantityValue = document.getElementById('QuantityValue');
-    const decreaseBtn = document.getElementById('QuantityDecrease');
-    const increaseBtn = document.getElementById('QuantityIncrease');
-    
-    decreaseBtn.addEventListener('click', function() {
-      let val = parseInt(quantityValue.textContent);
-      if (val > 1) quantityValue.textContent = val - 1;
-    });
-    
-    increaseBtn.addEventListener('click', function() {
-      let val = parseInt(quantityValue.textContent);
-      quantityValue.textContent = val + 1;
-    });
-  });
-</script>
+  </script>
+</section>
 {% schema %}
 {
   "name": "Product Main",
