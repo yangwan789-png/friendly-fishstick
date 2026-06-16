@@ -473,7 +473,7 @@
                 <input type="number" class="quantity-input" value="{{ item.quantity }}" min="1" readonly>
                 <button class="quantity-btn" onclick="changeQuantity({{ item.id }}, {{ item.quantity | plus: 1 }})">+</button>
               </div>
-              <a href="{{ item.url }}?delete=true" class="cart-item-remove">Remove</a>
+              <span class="cart-item-remove" onclick="removeItem({{ item.id }})">Remove</span>
             </div>
           </div>
         {% endfor %}
@@ -547,7 +547,10 @@
 
   <script>
     function changeQuantity(lineItemId, newQuantity) {
-      if (newQuantity < 1) return;
+      if (newQuantity < 1) {
+        removeItem(lineItemId);
+        return;
+      }
       
       const formData = new FormData();
       formData.append('id', lineItemId);
@@ -563,6 +566,24 @@
       })
       .catch(error => {
         console.error('Error updating quantity:', error);
+      });
+    }
+
+    function removeItem(lineItemId) {
+      const formData = new FormData();
+      formData.append('id', lineItemId);
+      formData.append('quantity', 0);
+      
+      fetch('/cart/change.js', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(() => {
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error('Error removing item:', error);
       });
     }
 
