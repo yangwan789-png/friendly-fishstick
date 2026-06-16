@@ -158,39 +158,33 @@
       transform: scale(1.05);
     }
 
-    .hero-card-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 16px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+    .hero-card-info {
+      position: relative;
+      padding: 12px 16px;
+      background: var(--color-bg-card);
+      border-top: 1px solid var(--color-border);
     }
 
-    .hero-card:hover .hero-card-overlay {
-      opacity: 1;
+    .hero-card:hover .hero-card-info {
+      background: rgba(20, 20, 30, 0.95);
     }
 
     .hero-card-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
-      color: white;
-      margin-bottom: 6px;
+      color: var(--color-text);
+      display: block;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      margin-bottom: 4px;
     }
 
     .hero-card-price {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--color-primary);
+      display: block;
     }
 
     .hero-card:nth-child(1) { grid-row: span 2; animation: float 6s ease-in-out infinite; }
@@ -272,7 +266,7 @@
           {% for product in section.settings.products %}
             <a href="{{ product.url }}" class="hero-card">
               <img src="{{ product.featured_image.src | img_url: '500x667' }}" alt="{{ product.title }}" class="hero-card-image">
-              <div class="hero-card-overlay">
+              <div class="hero-card-info">
                 <span class="hero-card-title">{{ product.title }}</span>
                 <span class="hero-card-price">{{ product.price | money }}</span>
               </div>
