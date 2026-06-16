@@ -188,7 +188,7 @@
     }
 
     .product__add-to-cart {
-      width: 100%;
+      flex: 1;
       padding: 18px;
       background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
       border: none;
@@ -206,6 +206,33 @@
     .product__add-to-cart:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .product__actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .product__buy-now {
+      flex: 1;
+      padding: 18px;
+      background: var(--color-bg);
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius-xl);
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .product__buy-now:hover {
+      background: var(--color-primary);
+      color: white;
+      box-shadow: var(--shadow-glow);
     }
 
     .product__tags {
@@ -312,7 +339,10 @@
         <span class="product__quantity-value" id="QuantityValue">1</span>
         <button class="product__quantity-btn" id="QuantityIncrease">+</button>
       </div>
-      <button class="product__add-to-cart" id="AddToCart">Add to Cart</button>
+      <div class="product__actions">
+        <button class="product__add-to-cart" id="AddToCart">Add to Cart</button>
+        <button class="product__buy-now" id="BuyNow">Buy Now</button>
+      </div>
       {% if product.tags.size > 0 %}
         <div class="product__tags">
           {% for tag in product.tags limit: 5 %}
@@ -376,6 +406,27 @@
         .then(response => response.json())
         .then(data => {
           window.location.href = '/cart';
+        })
+        .catch(error => {
+          console.error('Error adding to cart:', error);
+        });
+      });
+
+      const buyNowBtn = document.getElementById('BuyNow');
+      buyNowBtn.addEventListener('click', function() {
+        const quantity = parseInt(quantityValue.textContent);
+        
+        const formData = new FormData();
+        formData.append('id', selectedVariantId);
+        formData.append('quantity', quantity);
+        
+        fetch('/cart/add.js', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          window.location.href = '/checkout';
         })
         .catch(error => {
           console.error('Error adding to cart:', error);
