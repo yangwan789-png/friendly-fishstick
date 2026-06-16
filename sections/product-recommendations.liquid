@@ -48,6 +48,9 @@
       overflow: hidden;
       transition: all 0.4s ease;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
     .product-recommendations__card:hover {
@@ -61,6 +64,7 @@
       width: 100%;
       overflow: hidden;
       background: var(--color-bg-card);
+      flex-shrink: 0;
     }
 
     .product-recommendations__image {
@@ -126,6 +130,7 @@
 
     .product-recommendations__content {
       padding: 20px;
+      margin-top: auto;
     }
 
     .product-recommendations__category {
