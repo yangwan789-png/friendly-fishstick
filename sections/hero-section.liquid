@@ -164,9 +164,10 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
       display: flex;
-      align-items: flex-end;
+      flex-direction: column;
+      justify-content: flex-end;
       padding: 16px;
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -180,6 +181,16 @@
       font-size: 14px;
       font-weight: 600;
       color: white;
+      margin-bottom: 6px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .hero-card-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-primary);
     }
 
     .hero-card:nth-child(1) { grid-row: span 2; animation: float 6s ease-in-out infinite; }
@@ -263,6 +274,7 @@
               <img src="{{ product.featured_image.src | img_url: '500x667' }}" alt="{{ product.title }}" class="hero-card-image">
               <div class="hero-card-overlay">
                 <span class="hero-card-title">{{ product.title }}</span>
+                <span class="hero-card-price">{{ product.price | money }}</span>
               </div>
             </a>
           {% endfor %}
