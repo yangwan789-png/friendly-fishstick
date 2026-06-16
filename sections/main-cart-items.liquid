@@ -253,6 +253,99 @@
       box-shadow: var(--shadow-glow);
     }
 
+    .shipping-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .shipping-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .shipping-modal-content {
+      background: var(--color-bg-card);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .shipping-modal.active .shipping-modal-content {
+      transform: scale(1);
+    }
+
+    .shipping-modal-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--color-secondary);
+    }
+
+    .shipping-modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .shipping-modal-text {
+      font-size: 1rem;
+      color: var(--color-text-subdued);
+      margin-bottom: 24px;
+    }
+
+    .shipping-modal-highlight {
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .shipping-modal-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .shipping-modal-btn {
+      flex: 1;
+      padding: 14px;
+      border-radius: var(--radius-lg);
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .shipping-modal-btn-primary {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      color: white;
+    }
+
+    .shipping-modal-btn-secondary {
+      background: var(--color-bg);
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+    }
+
+    .shipping-modal-btn-primary:hover,
+    .shipping-modal-btn-secondary:hover {
+      transform: translateY(-2px);
+    }
+
     .cart-policy {
       margin-top: 24px;
       padding: 16px;
@@ -311,6 +404,27 @@
       }
     }
   </style>
+
+  <div class="shipping-modal" id="shippingModal">
+    <div class="shipping-modal-content">
+      <div class="shipping-modal-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 7h-9"></path>
+          <path d="M14 17H5"></path>
+          <path d="M19 17c0-2-3-5-7-5s-7 3-7 5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2Z"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <h3 class="shipping-modal-title">Free Shipping Alert!</h3>
+      <p class="shipping-modal-text">
+        Order <span class="shipping-modal-highlight">2+ items</span> to enjoy <span class="shipping-modal-highlight">FREE shipping</span>!
+      </p>
+      <div class="shipping-modal-buttons">
+        <button class="shipping-modal-btn shipping-modal-btn-secondary" id="continueAnyway">Continue</button>
+        <button class="shipping-modal-btn shipping-modal-btn-primary" id="addMoreItems">Add More</button>
+      </div>
+    </div>
+  </div>
 
   <div class="cart-header">
     <h1 class="cart-title">Your Cart</h1>
@@ -452,8 +566,46 @@
       });
     }
 
-    function checkout() {
+    const checkoutBtn = document.querySelector('.cart-checkout-btn');
+    const shippingModal = document.getElementById('shippingModal');
+    const continueAnywayBtn = document.getElementById('continueAnyway');
+    const addMoreItemsBtn = document.getElementById('addMoreItems');
+
+    checkoutBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      fetch('/cart.js')
+      .then(response => response.json())
+      .then(cart => {
+        const totalItems = cart.items.reduce((sum, item) => sum + item.quantity, 0);
+        
+        if (totalItems < 2) {
+          shippingModal.classList.add('active');
+          return;
+        }
+        
+        window.location.href = '/checkout';
+      })
+      .catch(error => {
+        console.error('Error fetching cart:', error);
+        window.location.href = '/checkout';
+      });
+    });
+
+    continueAnywayBtn.addEventListener('click', function() {
+      shippingModal.classList.remove('active');
       window.location.href = '/checkout';
-    }
+    });
+
+    addMoreItemsBtn.addEventListener('click', function() {
+      shippingModal.classList.remove('active');
+      window.location.href = '/collections/all';
+    });
+
+    shippingModal.addEventListener('click', function(e) {
+      if (e.target === shippingModal) {
+        shippingModal.classList.remove('active');
+      }
+    });
   </script>
 </section>
