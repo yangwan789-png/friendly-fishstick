@@ -222,90 +222,226 @@
 
   <div class="hero-bg"></div>
   <div class="hero-container">
-    <span class="hero-badge">New Collection 2026</span>
+    {% if section.settings.badge_text != blank %}
+      <span class="hero-badge">{{ section.settings.badge_text }}</span>
+    {% endif %}
     
     <h1 class="hero-title">
-      <span class="hero-title-gradient">Anime Art</span>
-      <br>
-      <span class="hero-title-gradient">Prints</span>
+      <span class="hero-title-gradient">{{ section.settings.title_line_1 }}</span>
+      {% if section.settings.title_line_2 != blank %}
+        <br>
+        <span class="hero-title-gradient">{{ section.settings.title_line_2 }}</span>
+      {% endif %}
     </h1>
     
-    <p class="hero-subtitle">
-      Discover premium art prints featuring your favorite anime characters. 
-      High-quality designs for true anime fans.
-    </p>
+    {% if section.settings.subtitle != blank %}
+      <p class="hero-subtitle">{{ section.settings.subtitle }}</p>
+    {% endif %}
 
     <div class="hero-stats">
       <div class="stat-item">
-        <span class="stat-number">1000+</span>
-        <span class="stat-label">Art Prints</span>
+        <span class="stat-number">{{ section.settings.stat_1_value }}</span>
+        <span class="stat-label">{{ section.settings.stat_1_label }}</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number">50+</span>
-        <span class="stat-label">Anime Series</span>
+        <span class="stat-number">{{ section.settings.stat_2_value }}</span>
+        <span class="stat-label">{{ section.settings.stat_2_label }}</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number">50K+</span>
-        <span class="stat-label">Happy Customers</span>
+        <span class="stat-number">{{ section.settings.stat_3_value }}</span>
+        <span class="stat-label">{{ section.settings.stat_3_label }}</span>
       </div>
     </div>
 
     <div class="hero-buttons">
-      <a href="/collections/all" class="btn btn-primary">Explore Collection</a>
-      <a href="/pages/about" class="btn btn-secondary">Learn More</a>
+      {% if section.settings.primary_button_text != blank %}
+        <a href="{{ section.settings.primary_button_link }}" class="btn btn-primary">{{ section.settings.primary_button_text }}</a>
+      {% endif %}
+      {% if section.settings.secondary_button_text != blank %}
+        <a href="{{ section.settings.secondary_button_link }}" class="btn btn-secondary">{{ section.settings.secondary_button_text }}</a>
+      {% endif %}
     </div>
 
-    <div class="hero-visual">
-      <div class="hero-grid">
-        <div class="hero-card">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=anime%20naruto%20uzumaki%20art%20print%20poster%20dark%20background&image_size=portrait_4_3" alt="Naruto" class="hero-card-image">
-          <div class="hero-card-overlay">
-            <span class="hero-card-title">Naruto</span>
-          </div>
-        </div>
-        <div class="hero-card">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=anime%20one%20piece%20luffy%20art%20print%20poster%20dark%20background&image_size=portrait_4_3" alt="One Piece" class="hero-card-image">
-          <div class="hero-card-overlay">
-            <span class="hero-card-title">One Piece</span>
-          </div>
-        </div>
-        <div class="hero-card">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=anime%20dragon%20ball%20goku%20art%20print%20poster%20dark%20background&image_size=portrait_4_3" alt="Dragon Ball" class="hero-card-image">
-          <div class="hero-card-overlay">
-            <span class="hero-card-title">Dragon Ball</span>
-          </div>
-        </div>
-        <div class="hero-card">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=marvel%20spider%20man%20art%20print%20poster%20dark%20background&image_size=portrait_4_3" alt="Marvel" class="hero-card-image">
-          <div class="hero-card-overlay">
-            <span class="hero-card-title">Marvel</span>
-          </div>
-        </div>
-        <div class="hero-card">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=anime%20sasuke%20uchiha%20art%20print%20poster%20dark%20background&image_size=portrait_4_3" alt="Sasuke" class="hero-card-image">
-          <div class="hero-card-overlay">
-            <span class="hero-card-title">Sasuke</span>
-          </div>
-        </div>
-        <div class="hero-card">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=anime%20vegeta%20dragon%20ball%20art%20print%20poster%20dark%20background&image_size=portrait_4_3" alt="Vegeta" class="hero-card-image">
-          <div class="hero-card-overlay">
-            <span class="hero-card-title">Vegeta</span>
-          </div>
-        </div>
-        <div class="hero-card">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=marvel%20iron%20man%20art%20print%20poster%20dark%20background&image_size=portrait_4_3" alt="Iron Man" class="hero-card-image">
-          <div class="hero-card-overlay">
-            <span class="hero-card-title">Iron Man</span>
-          </div>
-        </div>
-        <div class="hero-card">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=anime%20zoro%20one%20piece%20art%20print%20poster%20dark%20background&image_size=portrait_4_3" alt="Zoro" class="hero-card-image">
-          <div class="hero-card-overlay">
-            <span class="hero-card-title">Zoro</span>
-          </div>
+    {% if section.blocks.size > 0 %}
+      <div class="hero-visual">
+        <div class="hero-grid">
+          {% for block in section.blocks %}
+            <div class="hero-card">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image.src | img_url: '500x667' }}" alt="{{ block.settings.title }}" class="hero-card-image">
+              {% endif %}
+              <div class="hero-card-overlay">
+                <span class="hero-card-title">{{ block.settings.title }}</span>
+              </div>
+            </div>
+          {% endfor %}
         </div>
       </div>
-    </div>
+    {% endif %}
   </div>
 </section>
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "New Collection 2026"
+    },
+    {
+      "type": "text",
+      "id": "title_line_1",
+      "label": "Title Line 1",
+      "default": "Anime Art"
+    },
+    {
+      "type": "text",
+      "id": "title_line_2",
+      "label": "Title Line 2",
+      "default": "Prints"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Discover premium art prints featuring your favorite anime characters. High-quality designs for true anime fans."
+    },
+    {
+      "type": "text",
+      "id": "stat_1_value",
+      "label": "Stat 1 Value",
+      "default": "1000+"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 Label",
+      "default": "Art Prints"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_value",
+      "label": "Stat 2 Value",
+      "default": "50+"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 Label",
+      "default": "Anime Series"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_value",
+      "label": "Stat 3 Value",
+      "default": "50K+"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 Label",
+      "default": "Happy Customers"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary Button Text",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary Button Link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary Button Text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary Button Link",
+      "default": "/pages/about"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero_card",
+      "name": "Hero Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Section",
+      "settings": {},
+      "blocks": [
+        {
+          "type": "hero_card",
+          "settings": {
+            "title": "Naruto"
+          }
+        },
+        {
+          "type": "hero_card",
+          "settings": {
+            "title": "One Piece"
+          }
+        },
+        {
+          "type": "hero_card",
+          "settings": {
+            "title": "Dragon Ball"
+          }
+        },
+        {
+          "type": "hero_card",
+          "settings": {
+            "title": "Marvel"
+          }
+        },
+        {
+          "type": "hero_card",
+          "settings": {
+            "title": "Sasuke"
+          }
+        },
+        {
+          "type": "hero_card",
+          "settings": {
+            "title": "Vegeta"
+          }
+        },
+        {
+          "type": "hero_card",
+          "settings": {
+            "title": "Iron Man"
+          }
+        },
+        {
+          "type": "hero_card",
+          "settings": {
+            "title": "Zoro"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
