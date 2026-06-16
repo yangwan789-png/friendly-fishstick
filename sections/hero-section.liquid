@@ -161,40 +161,45 @@
     .hero-card-info {
       position: relative;
       padding: 12px 16px;
-      background: var(--color-bg-card);
-      border-top: 1px solid var(--color-border);
-    }
-
-    .hero-card:hover .hero-card-info {
-      background: rgba(20, 20, 30, 0.95);
+      background: #16161d;
+      border-top: 1px solid #2a2a35;
+      min-height: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .hero-card-title {
       font-size: 13px;
       font-weight: 600;
-      color: var(--color-text);
+      color: #ffffff;
       display: block;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       margin-bottom: 4px;
+      line-height: 1.4;
     }
 
     .hero-card-price {
       font-size: 15px;
       font-weight: 700;
-      color: var(--color-primary);
+      color: #ff2a6d;
       display: block;
+      line-height: 1.4;
     }
 
-    .hero-card:nth-child(1) { grid-row: span 2; animation: float 6s ease-in-out infinite; }
-    .hero-card:nth-child(2) { grid-row: span 1; animation: float 6s ease-in-out infinite 1s; }
-    .hero-card:nth-child(3) { grid-row: span 1; animation: float 6s ease-in-out infinite 2s; }
-    .hero-card:nth-child(4) { grid-row: span 2; animation: float 6s ease-in-out infinite 3s; }
-    .hero-card:nth-child(5) { grid-row: span 1; animation: float 6s ease-in-out infinite 4s; }
-    .hero-card:nth-child(6) { grid-row: span 1; animation: float 6s ease-in-out infinite 5s; }
-    .hero-card:nth-child(7) { grid-row: span 1; animation: float 6s ease-in-out infinite 0.5s; }
-    .hero-card:nth-child(8) { grid-row: span 1; animation: float 6s ease-in-out infinite 1.5s; }
+    .hero-card {
+      animation: float 6s ease-in-out infinite;
+    }
+    .hero-card:nth-child(1) { animation-delay: 0s; }
+    .hero-card:nth-child(2) { animation-delay: 0.5s; }
+    .hero-card:nth-child(3) { animation-delay: 1s; }
+    .hero-card:nth-child(4) { animation-delay: 1.5s; }
+    .hero-card:nth-child(5) { animation-delay: 2s; }
+    .hero-card:nth-child(6) { animation-delay: 2.5s; }
+    .hero-card:nth-child(7) { animation-delay: 3s; }
+    .hero-card:nth-child(8) { animation-delay: 3.5s; }
 
     @media (max-width: 768px) {
       .hero {
@@ -219,9 +224,8 @@
         gap: 8px;
       }
 
-      .hero-card:nth-child(1),
-      .hero-card:nth-child(4) {
-        grid-row: span 1;
+      .hero-card {
+        animation: none;
       }
     }
   </style>
