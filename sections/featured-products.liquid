@@ -343,13 +343,13 @@
     </div>
 
     <div class="gallery-grid">
-      {% if section.settings.images != blank %}
-        {% for block in section.settings.images %}
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
           <div class="gallery-item">
-            <img src="{{ block.image.src }}" alt="{{ block.title }}" class="gallery-image">
+            <img src="{{ block.settings.image.src }}" alt="{{ block.settings.title }}" class="gallery-image">
             <div class="gallery-overlay">
-              <span class="gallery-item-title">{{ block.title }}</span>
-              <span class="gallery-item-location">{{ block.location }}</span>
+              <span class="gallery-item-title">{{ block.settings.title }}</span>
+              <span class="gallery-item-location">{{ block.settings.location }}</span>
             </div>
           </div>
         {% endfor %}
