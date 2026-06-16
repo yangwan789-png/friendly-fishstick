@@ -1,12 +1,12 @@
-<section class="gallery-section">
+<section class="real-displays-section">
   <style>
-    .gallery-section {
+    .real-displays-section {
       padding: 80px 0;
       position: relative;
       background: linear-gradient(180deg, var(--color-bg) 0%, #0d0d14 100%);
     }
 
-    .gallery-section::before {
+    .real-displays-section::before {
       content: '';
       position: absolute;
       top: 0;
@@ -16,7 +16,7 @@
       background: linear-gradient(90deg, transparent, var(--color-border), transparent);
     }
 
-    .gallery-container {
+    .displays-container {
       max-width: 1400px;
       margin: 0 auto;
       padding: 0 24px;
@@ -68,224 +68,189 @@
       fill: var(--color-primary);
     }
 
-    .gallery-highlight {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      margin-bottom: 64px;
+    .frame-showcase {
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      margin-bottom: 64px;
     }
 
-    .highlight-image-wrapper {
+    .frame-showcase-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .frame-showcase-container {
       position: relative;
+      max-width: 600px;
+      width: 100%;
       border-radius: var(--radius-xl);
       overflow: hidden;
       box-shadow: var(--shadow-lg), var(--shadow-glow);
+      transition: transform 0.5s ease;
     }
 
-    .highlight-image {
+    .frame-showcase-container:hover {
+      transform: translateY(-4px);
+    }
+
+    .frame-showcase-image {
       width: 100%;
       height: auto;
       display: block;
     }
 
-    .highlight-badge {
+    .frame-showcase-overlay {
       position: absolute;
-      top: 20px;
-      left: 20px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .frame-showcase-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .frame-showcase-badge {
       padding: 8px 16px;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--color-primary);
+      background: var(--color-primary);
       border-radius: var(--radius-full);
       font-size: 12px;
       font-weight: 600;
-      color: var(--color-primary);
+      color: white;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
-    .highlight-info {
-      padding: 24px 0;
-    }
-
-    .highlight-title {
-      font-size: clamp(1.5rem, 3vw, 2.5rem);
-      font-weight: 800;
-      margin-bottom: 16px;
-      line-height: 1.2;
-    }
-
-    .highlight-title span {
-      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .highlight-description {
-      font-size: 1.125rem;
-      color: var(--color-text-subdued);
-      line-height: 1.8;
-      margin-bottom: 24px;
-    }
-
-    .frame-features {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+    .product-displays-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
       margin-bottom: 32px;
     }
 
-    .frame-feature {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 16px;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--color-border);
-    }
-
-    .frame-feature-icon {
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-      border-radius: var(--radius-md);
-      flex-shrink: 0;
-    }
-
-    .frame-feature-icon svg {
-      width: 16px;
-      height: 16px;
-      fill: white;
-    }
-
-    .frame-feature-text {
-      font-size: 14px;
-      color: var(--color-text);
-    }
-
-    .gallery-grid {
+    .product-displays-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 24px;
+      margin-bottom: 64px;
     }
 
-    .gallery-item {
+    .product-display-card {
       position: relative;
       border-radius: var(--radius-xl);
       overflow: hidden;
-      cursor: pointer;
-      transition: all 0.4s ease;
       background: var(--color-bg-card);
+      transition: all 0.4s ease;
     }
 
-    .gallery-item:hover {
+    .product-display-card:hover {
       transform: translateY(-8px);
       box-shadow: var(--shadow-lg), var(--shadow-glow);
     }
 
-    .gallery-item:nth-child(1) { grid-row: span 2; }
-    .gallery-item:nth-child(3) { grid-row: span 2; }
-    .gallery-item:nth-child(5) { grid-row: span 2; }
+    .product-display-image-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
 
-    .gallery-image {
+    .product-display-image {
       width: 100%;
       height: auto;
       display: block;
       transition: transform 0.5s ease;
     }
 
-    .gallery-item:hover .gallery-image {
+    .product-display-card:hover .product-display-image {
       transform: scale(1.05);
     }
 
-    .gallery-overlay {
+    .product-display-badge {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 20px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .gallery-item:hover .gallery-overlay {
-      opacity: 1;
-    }
-
-    .gallery-item-title {
-      font-size: 14px;
+      top: 16px;
+      left: 16px;
+      padding: 6px 12px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      font-size: 11px;
       font-weight: 600;
-      color: white;
-      margin-bottom: 4px;
-    }
-
-    .gallery-item-location {
-      font-size: 12px;
       color: var(--color-primary);
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
-    .gallery-cta {
+    .product-display-info {
+      padding: 20px;
       text-align: center;
-      margin-top: 64px;
     }
 
-    .gallery-cta p {
+    .product-display-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+
+    .product-display-location {
+      font-size: 12px;
+      color: var(--color-text-subdued);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .displays-cta {
+      text-align: center;
+    }
+
+    .displays-cta p {
       font-size: 1.125rem;
       color: var(--color-text-subdued);
       margin-bottom: 24px;
     }
 
     @media (max-width: 1024px) {
-      .gallery-highlight {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .gallery-grid {
+      .product-displays-grid {
         grid-template-columns: repeat(2, 1fr);
-      }
-
-      .gallery-item:nth-child(1),
-      .gallery-item:nth-child(3),
-      .gallery-item:nth-child(5) {
-        grid-row: span 1;
       }
     }
 
     @media (max-width: 768px) {
-      .gallery-section {
+      .real-displays-section {
         padding: 60px 0;
       }
 
-      .gallery-grid {
+      .product-displays-grid {
         grid-template-columns: 1fr;
         gap: 16px;
       }
 
-      .frame-features {
-        grid-template-columns: 1fr;
+      .frame-showcase-overlay {
+        padding: 20px;
       }
 
-      .highlight-info {
-        padding: 16px 0;
+      .frame-showcase-title {
+        font-size: 1.125rem;
       }
     }
   </style>
 
-  <div class="gallery-container">
+  <div class="displays-container">
     <div class="section-header">
       <h2 class="section-title">Real <span>Displays</span></h2>
       <p class="section-subtitle">See how our art prints look in real spaces. Every order includes a FREE premium frame.</p>
@@ -297,110 +262,90 @@
       </div>
     </div>
 
-    <div class="gallery-highlight">
-      <div class="highlight-image-wrapper">
-        <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=anime%20art%20print%20framed%20on%20wall%20realistic%20interior%20living%20room%20decoration%20professional%20photography&image_size=landscape_4_3" alt="Featured Gallery" class="highlight-image">
-        <span class="highlight-badge">Best Selling</span>
-      </div>
-      <div class="highlight-info">
-        <h3 class="highlight-title">Transform Your <span>Space</span></h3>
-        <p class="highlight-description">Our premium art prints come ready to hang with a complimentary frame. Each piece is carefully crafted with high-quality materials to ensure lasting quality.</p>
-        <div class="frame-features">
-          <div class="frame-feature">
-            <div class="frame-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M20 19V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zM6 5h12v14H6V5zm2 3h8v2H8V8zm0 4h8v2H8v-2zm0 4h8v2H8v-2z"/>
-              </svg>
-            </div>
-            <span class="frame-feature-text">Free Frame Included</span>
-          </div>
-          <div class="frame-feature">
-            <div class="frame-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-              </svg>
-            </div>
-            <span class="frame-feature-text">Protective Glass</span>
-          </div>
-          <div class="frame-feature">
-            <div class="frame-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 13h5v5H7zm7-5h5v5h-5zm0 5h5v5h-5z"/>
-              </svg>
-            </div>
-            <span class="frame-feature-text">Ready to Hang</span>
-          </div>
-          <div class="frame-feature">
-            <div class="frame-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
-              </svg>
-            </div>
-            <span class="frame-feature-text">High Quality</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% if section.blocks.size > 0 %}
+      {% assign frame_block = section.blocks | where: 'type', 'frame_showcase' | first %}
+      {% assign product_blocks = section.blocks | where: 'type', 'product_display' %}
 
-    <div class="gallery-grid">
-      {% for block in section.blocks %}
-        {% if block.settings.image %}
-          <div class="gallery-item">
-            <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title | escape }}" class="gallery-image">
-            <div class="gallery-overlay">
-              <span class="gallery-item-title">{{ block.settings.title }}</span>
-              <span class="gallery-item-location">{{ block.settings.location }}</span>
+      {% if frame_block %}
+        <div class="frame-showcase">
+          <span class="frame-showcase-label">Included Frame</span>
+          <div class="frame-showcase-container">
+            <img src="{{ frame_block.settings.image | img_url: 'master' }}" alt="{{ frame_block.settings.title | escape }}" class="frame-showcase-image">
+            <div class="frame-showcase-overlay">
+              <span class="frame-showcase-title">{{ frame_block.settings.title }}</span>
+              <span class="frame-showcase-badge">Free Gift</span>
             </div>
-          </div>
-        {% endif %}
-      {% endfor %}
-      {% if section.blocks.size == 0 %}
-        <div class="gallery-item">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=naruto%20anime%20art%20print%20framed%20on%20bedroom%20wall%20realistic%20photo&image_size=portrait_4_3" alt="Gallery 1" class="gallery-image">
-          <div class="gallery-overlay">
-            <span class="gallery-item-title">Naruto Collection</span>
-            <span class="gallery-item-location">Tokyo, Japan</span>
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=one%20piece%20anime%20art%20print%20framed%20on%20living%20room%20wall%20realistic%20photo&image_size=landscape_16_9" alt="Gallery 2" class="gallery-image">
-          <div class="gallery-overlay">
-            <span class="gallery-item-title">One Piece Wall</span>
-            <span class="gallery-item-location">New York, USA</span>
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=dragon%20ball%20anime%20art%20print%20framed%20on%20game%20room%20wall%20realistic%20photo&image_size=portrait_4_3" alt="Gallery 3" class="gallery-image">
-          <div class="gallery-overlay">
-            <span class="gallery-item-title">Dragon Ball Setup</span>
-            <span class="gallery-item-location">London, UK</span>
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=marvel%20superhero%20art%20print%20framed%20on%20office%20wall%20realistic%20photo&image_size=landscape_16_9" alt="Gallery 4" class="gallery-image">
-          <div class="gallery-overlay">
-            <span class="gallery-item-title">Marvel Office</span>
-            <span class="gallery-item-location">Paris, France</span>
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=anime%20art%20collection%20multiple%20prints%20framed%20on%20wall%20realistic%20photo&image_size=portrait_4_3" alt="Gallery 5" class="gallery-image">
-          <div class="gallery-overlay">
-            <span class="gallery-item-title">Ultimate Collection</span>
-            <span class="gallery-item-location">Sydney, Australia</span>
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=anime%20art%20print%20framed%20on%20study%20room%20wall%20realistic%20photo&image_size=landscape_16_9" alt="Gallery 6" class="gallery-image">
-          <div class="gallery-overlay">
-            <span class="gallery-item-title">Study Room</span>
-            <span class="gallery-item-location">Seoul, Korea</span>
           </div>
         </div>
       {% endif %}
-    </div>
 
-    <div class="gallery-cta">
+      {% if product_blocks.size > 0 %}
+        <span class="product-displays-label">Customer Displays</span>
+        <div class="product-displays-grid">
+          {% for block in product_blocks %}
+            {% if block.settings.image %}
+              <div class="product-display-card">
+                <div class="product-display-image-wrapper">
+                  <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title | escape }}" class="product-display-image">
+                  <span class="product-display-badge">{{ block.settings.badge }}</span>
+                </div>
+                <div class="product-display-info">
+                  <span class="product-display-title">{{ block.settings.title }}</span>
+                  <span class="product-display-location">{{ block.settings.location }}</span>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="frame-showcase">
+        <span class="frame-showcase-label">Included Frame</span>
+        <div class="frame-showcase-container">
+          <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=black%20picture%20frame%20modern%20minimalist%20design%20professional%20product%20photography%20white%20background&image_size=landscape_4_3" alt="Premium Frame" class="frame-showcase-image">
+          <div class="frame-showcase-overlay">
+            <span class="frame-showcase-title">Premium Frame</span>
+            <span class="frame-showcase-badge">Free Gift</span>
+          </div>
+        </div>
+      </div>
+
+      <span class="product-displays-label">Customer Displays</span>
+      <div class="product-displays-grid">
+        <div class="product-display-card">
+          <div class="product-display-image-wrapper">
+            <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=anime%20art%20print%20framed%20on%20bedroom%20wall%20realistic%20customer%20photo&image_size=portrait_4_3" alt="Display 1" class="product-display-image">
+            <span class="product-display-badge">Customer Photo</span>
+          </div>
+          <div class="product-display-info">
+            <span class="product-display-title">Bedroom Decor</span>
+            <span class="product-display-location">Tokyo, Japan</span>
+          </div>
+        </div>
+        <div class="product-display-card">
+          <div class="product-display-image-wrapper">
+            <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=anime%20art%20print%20framed%20on%20living%20room%20wall%20realistic%20customer%20photo&image_size=portrait_4_3" alt="Display 2" class="product-display-image">
+            <span class="product-display-badge">Customer Photo</span>
+          </div>
+          <div class="product-display-info">
+            <span class="product-display-title">Living Room</span>
+            <span class="product-display-location">New York, USA</span>
+          </div>
+        </div>
+        <div class="product-display-card">
+          <div class="product-display-image-wrapper">
+            <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=anime%20art%20print%20framed%20on%20game%20room%20wall%20realistic%20customer%20photo&image_size=portrait_4_3" alt="Display 3" class="product-display-image">
+            <span class="product-display-badge">Customer Photo</span>
+          </div>
+          <div class="product-display-info">
+            <span class="product-display-title">Game Room</span>
+            <span class="product-display-location">London, UK</span>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="displays-cta">
       <p>Get your favorite anime art print with a FREE premium frame today!</p>
       <a href="/collections/all" class="btn btn-primary">Explore Collection</a>
     </div>
@@ -419,18 +364,36 @@
       ],
       "blocks": [
         {
-          "type": "display_image",
-          "name": "Display Image",
+          "type": "frame_showcase",
+          "name": "Frame Showcase",
+          "limit": 1,
           "settings": [
             {
               "type": "image_picker",
               "id": "image",
-              "label": "Image"
+              "label": "Frame Image"
             },
             {
               "type": "text",
               "id": "title",
-              "label": "Title",
+              "label": "Frame Title",
+              "default": "Premium Frame"
+            }
+          ]
+        },
+        {
+          "type": "product_display",
+          "name": "Product Display",
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Product Image"
+            },
+            {
+              "type": "text",
+              "id": "title",
+              "label": "Display Title",
               "default": "Display Item"
             },
             {
@@ -438,6 +401,12 @@
               "id": "location",
               "label": "Location",
               "default": "Customer Home"
+            },
+            {
+              "type": "text",
+              "id": "badge",
+              "label": "Badge Text",
+              "default": "Customer Photo"
             }
           ]
         }
