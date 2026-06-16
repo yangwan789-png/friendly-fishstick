@@ -132,12 +132,12 @@
     }
 
     .hero-card {
-      aspect-ratio: 3/4;
       border-radius: var(--radius-xl);
       overflow: hidden;
       position: relative;
       transition: all 0.3s ease;
       cursor: pointer;
+      background: var(--color-bg-card);
     }
 
     .hero-card:hover {
@@ -148,13 +148,14 @@
 
     .hero-card-image {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      object-fit: contain;
       transition: transform 0.5s ease;
+      display: block;
     }
 
     .hero-card:hover .hero-card-image {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     .hero-card-overlay {
@@ -222,16 +223,12 @@
 
   <div class="hero-bg"></div>
   <div class="hero-container">
-    {% if section.settings.badge_text != blank %}
-      <span class="hero-badge">{{ section.settings.badge_text }}</span>
-    {% endif %}
+    <span class="hero-badge">New Collection 2026</span>
     
     <h1 class="hero-title">
-      <span class="hero-title-gradient">{{ section.settings.title_line_1 }}</span>
-      {% if section.settings.title_line_2 != blank %}
-        <br>
-        <span class="hero-title-gradient">{{ section.settings.title_line_2 }}</span>
-      {% endif %}
+      <span class="hero-title-gradient">Anime Art</span>
+      <br>
+      <span class="hero-title-gradient">Prints</span>
     </h1>
     
     {% if section.settings.subtitle != blank %}
@@ -240,26 +237,22 @@
 
     <div class="hero-stats">
       <div class="stat-item">
-        <span class="stat-number">{{ section.settings.stat_1_value }}</span>
-        <span class="stat-label">{{ section.settings.stat_1_label }}</span>
+        <span class="stat-number">1000+</span>
+        <span class="stat-label">Art Prints</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number">{{ section.settings.stat_2_value }}</span>
-        <span class="stat-label">{{ section.settings.stat_2_label }}</span>
+        <span class="stat-number">50+</span>
+        <span class="stat-label">Anime Series</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number">{{ section.settings.stat_3_value }}</span>
-        <span class="stat-label">{{ section.settings.stat_3_label }}</span>
+        <span class="stat-number">50K+</span>
+        <span class="stat-label">Happy Customers</span>
       </div>
     </div>
 
     <div class="hero-buttons">
-      {% if section.settings.primary_button_text != blank %}
-        <a href="{{ section.settings.primary_button_link }}" class="btn btn-primary">{{ section.settings.primary_button_text }}</a>
-      {% endif %}
-      {% if section.settings.secondary_button_text != blank %}
-        <a href="{{ section.settings.secondary_button_link }}" class="btn btn-secondary">{{ section.settings.secondary_button_text }}</a>
-      {% endif %}
+      <a href="/collections/all" class="btn btn-primary">Explore Collection</a>
+      <a href="/pages/about" class="btn btn-secondary">Learn More</a>
     </div>
 
     {% if section.settings.products != blank %}
