@@ -343,17 +343,18 @@
     </div>
 
     <div class="gallery-grid">
-      {% if section.blocks.size > 0 %}
-        {% for block in section.blocks %}
+      {% for block in section.blocks %}
+        {% if block.settings.image %}
           <div class="gallery-item">
-            <img src="{{ block.settings.image.src }}" alt="{{ block.settings.title }}" class="gallery-image">
+            <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title | escape }}" class="gallery-image">
             <div class="gallery-overlay">
               <span class="gallery-item-title">{{ block.settings.title }}</span>
               <span class="gallery-item-location">{{ block.settings.location }}</span>
             </div>
           </div>
-        {% endfor %}
-      {% else %}
+        {% endif %}
+      {% endfor %}
+      {% if section.blocks.size == 0 %}
         <div class="gallery-item">
           <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=naruto%20anime%20art%20print%20framed%20on%20bedroom%20wall%20realistic%20photo&image_size=portrait_4_3" alt="Gallery 1" class="gallery-image">
           <div class="gallery-overlay">
