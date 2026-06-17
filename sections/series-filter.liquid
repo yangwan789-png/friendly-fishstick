@@ -73,31 +73,18 @@
   <div class="container">
     <h3 class="series-filter__title">Product Series</h3>
     <div class="series-filter__list">
-      <a href="/collections/all" class="series-filter__item {% if collection.handle == 'all' %}active{% endif %}">All Series</a>
-      {% if section.settings.collections != blank %}
-        {% for col in section.settings.collections %}
-          <a href="{{ col.url }}" class="series-filter__item {% if collection.handle == col.handle %}active{% endif %}">{{ col.title }}</a>
-        {% endfor %}
-      {% else %}
-        {% for col in collections.all %}
-          {% if col.handle != 'all' %}
-            <a href="{{ col.url }}" class="series-filter__item {% if collection.handle == col.handle %}active{% endif %}">{{ col.title }}</a>
-          {% endif %}
-        {% endfor %}
-      {% endif %}
+      <a href="/collections/all" class="series-filter__item {% if collection.handle == 'all' or template.name == 'list-collections' %}active{% endif %}">All Series</a>
+      {% for col in collections.all %}
+        {% if col.handle != 'all' and col.products_count > 0 %}
+          <a href="{{ col.url }}" class="series-filter__item {% if collection.handle == col.handle %}active{% endif %}">{{ col.title }} ({{ col.products_count }})</a>
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
 </section>
 {% schema %}
 {
   "name": "Series Filter",
-  "settings": [
-    {
-      "type": "collection_list",
-      "id": "collections",
-      "label": "Collections",
-      "info": "Select collections to display as filter options"
-    }
-  ]
+  "settings": []
 }
 {% endschema %}
