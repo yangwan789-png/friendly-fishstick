@@ -325,9 +325,6 @@
           {% for block in product_blocks %}
             <div class="product-display-card">
               <div class="product-display-media-wrapper">
-                {% if block.settings.image %}
-                  <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title | escape }}" class="product-display-image" loading="lazy">
-                {% endif %}
                 {% if block.settings.video_url != blank %}
                   <video 
                     class="product-display-video"
@@ -335,7 +332,7 @@
                     muted 
                     playsinline
                     preload="metadata"
-                    style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:none;"
+                    {% if block.settings.image %}style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:none;"{% endif %}
                     data-video-url="{{ block.settings.video_url }}"
                   ></video>
                   <div class="product-display-play-btn" data-play-btn>
@@ -343,6 +340,9 @@
                       <path d="M8 5v14l11-7z"/>
                     </svg>
                   </div>
+                {% endif %}
+                {% if block.settings.image %}
+                  <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title | escape }}" class="product-display-image" loading="lazy">
                 {% endif %}
                 <span class="product-display-badge">{{ block.settings.badge }}</span>
               </div>
@@ -417,11 +417,14 @@
           const img = wrapper.querySelector('img');
           
           if (video) {
-            const source = document.createElement('source');
-            source.src = video.dataset.videoUrl;
-            source.type = 'video/mp4';
-            video.appendChild(source);
+            if (!video.querySelector('source')) {
+              const source = document.createElement('source');
+              source.src = video.dataset.videoUrl;
+              source.type = 'video/mp4';
+              video.appendChild(source);
+            }
             video.style.display = 'block';
+            video.style.position = 'relative';
             video.play().catch(err => console.log('Video play error:', err));
             
             if (img) img.style.display = 'none';
