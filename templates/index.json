@@ -1,16 +1,94 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero-section",
-      "settings": {}
+      "settings": {
+        "subtitle": "Discover art prints from your favorite anime series",
+        "products": [
+          "世界杯-19",
+          "世界杯-12",
+          "世界杯-10",
+          "世界杯-3",
+          "世界杯",
+          "世界杯-7",
+          "世界杯-2",
+          "世界杯-9"
+        ]
+      }
     },
     "series-grid": {
       "type": "series-grid",
-      "settings": {}
+      "settings": {
+        "subtitle": "Discover art prints from your favorite anime series",
+        "collections": [
+          "world-cup-stars",
+          "super-hero",
+          "pokemon",
+          "dragon-ball",
+          "one-piece",
+          "jujutsu-kaisen",
+          "naruto",
+          "spy-x-family"
+        ]
+      }
     },
     "featured-products": {
       "type": "featured-products",
-      "settings": {}
+      "blocks": {
+        "product_display_UCfh7c": {
+          "type": "product_display",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/b53a5ba207fb4df78d95eb013d22e63f.mp4",
+            "title": "Display Item",
+            "location": "Studio Display",
+            "badge": "Official Video"
+          }
+        },
+        "product_display_GtMAe3": {
+          "type": "product_display",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/bd7cce33a8d543c68fcd565ce5545c86.mp4",
+            "title": "Display Item",
+            "location": "Studio Display",
+            "badge": "Official Video"
+          }
+        },
+        "frame_showcase_wj8w86": {
+          "type": "frame_showcase",
+          "settings": {
+            "image": "shopify://shop_images/a4ed4f2057dcb1503898ec4355283347.jpg",
+            "title": "Premium Frame"
+          }
+        },
+        "product_display_J8G4R6": {
+          "type": "product_display",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/f4abc0913eb94558b779ea689e18a9e1.mp4",
+            "title": "Display Item",
+            "location": "Studio Display",
+            "badge": "Official Video"
+          }
+        }
+      },
+      "block_order": [
+        "product_display_UCfh7c",
+        "product_display_GtMAe3",
+        "frame_showcase_wj8w86",
+        "product_display_J8G4R6"
+      ],
+      "name": "Real Displays",
+      "settings": {
+        "subtitle": "Handpicked selection of our most popular art prints"
+      }
     },
     "testimonials": {
       "type": "testimonials",
@@ -21,5 +99,11 @@
       "settings": {}
     }
   },
-  "order": ["hero", "series-grid", "featured-products", "testimonials", "newsletter"]
+  "order": [
+    "hero",
+    "series-grid",
+    "featured-products",
+    "testimonials",
+    "newsletter"
+  ]
 }
